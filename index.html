@@ -37,48 +37,42 @@
 
         <div class="main">
             <div class="container">
+                <form role="form">
                 <div class="panel-group">
                     <div class="panel panel-warning">
                         <div class="panel-heading"><button type="button" class="btn btn-primary disabled">Add work</button></div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-1">
-                                    <form role="form">
                                     <div class="form-group">
                                         <label for="id">#:</label>
                                         <input type="text" class="form-control" id="id" disabled value="{{id}}">
                                     </div>
-                                    </form>
                                 </div>
                                 <div class="col-md-3">
-                                    <form role="form">
-                                        <div class="form-group">
-                                            <label for="workToDo">Work:</label>
-                                            <input type="text" class="form-control" id="workToDo" placeholder="What need to do">
-                                        </div>
-                                    </form>
+                                    <div class="form-group">
+                                        <label for="workToDo">Work:</label>
+                                        <input type="text" class="form-control" id="workToDo" placeholder="What need to do">
+                                    </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <form role="form">
-                                        <div class="form-group">
-                                            <label for="time">Time:</label>
-                                            <input type="text" class="form-control" id="time" placeholder="Enter time in minutes">
-                                        </div>
-                                    </form>
+                                    <div class="form-group">
+                                        <label for="time">Time:</label>
+                                        <input type="text" class="form-control" id="time" placeholder="Enter time in minutes">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <form role="form">
-                                        <div class="form-group">
-                                            <label for="comment">Comment:</label>
-                                            <textarea class="form-control" rows="3" id="comment" placeholder="Comment will be displayed, when you hover the cursor in the list"></textarea>
-                                        </div>
-                                    </form>
+                                    <div class="form-group">
+                                        <label for="comment">Comment:</label>
+                                        <textarea class="form-control" rows="3" id="comment" placeholder="Comment will be displayed, when you hover the cursor in the list"></textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="panel panel-info">
                         <div class="panel-heading">List for {{datetime}}</div>
                         <div class="panel-body">
@@ -120,7 +114,17 @@
                                     <td>60</td>
                                     <td>40</td>
                                     <td>Problems with configmanager</td>
-                                    <td>start/pause/stop</td>
+                                    <td>
+                                        <div class="player">
+                                            <button type="button" id="button_play" class="btn btn-xs" onclick='buttonPlayPress()'>
+                                                <i class="fa fa-play"></i>
+                                            </button>
+
+                                            <button type="button" id="button_stop" class="btn btn-xs" onclick='buttonStopPress()'>
+                                                <i class="fa fa-stop"></i>
+                                            </button>
+                                        </div>
+                                    </td>
                                     <th><button type="button" class="btn btn-danger btn-xs">Delete</button></th>
                                 </tr>
                                 <tr>
@@ -129,7 +133,17 @@
                                     <td>180</td>
                                     <td>60</td>
                                     <td>Add AngularJS</td>
-                                    <td>start/pause/stop</td>
+                                    <td>
+                                        <div class="player">
+                                            <button type="button" id="button_play" class="btn btn-xs" onclick='buttonPlayPress()'>
+                                                <i class="fa fa-play"></i>
+                                            </button>
+
+                                            <button type="button" id="button_stop" class="btn btn-xs" onclick='buttonStopPress()'>
+                                                <i class="fa fa-stop"></i>
+                                            </button>
+                                        </div>
+                                    </td>
                                     <th><button type="button" class="btn btn-danger btn-xs">Delete</button></th>
                                 </tr>
                                 </tbody>
@@ -137,6 +151,7 @@
                         </div>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
 
