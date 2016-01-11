@@ -65,7 +65,7 @@
             </div>
 
             <div class="panel panel-info">
-                <div class="panel-heading">List for {{datetime}}</div>
+                <div class="panel-heading">List for <?php htmlOut(date('d.m.Y')); ?></div>
                 <div class="panel-body">
                     <table class="table table-striped">
                         <thead>
