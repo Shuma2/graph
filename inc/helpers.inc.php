@@ -1,7 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Shuma
- * Date: 11.01.2016
- * Time: 19:20
- */
+function html($text)
+{
+    return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+}
+
+function htmlout($text)
+{
+    echo html($text);
+}
+
+function errorText($erText, $e)
+{
+    $error = "$erText: " . $e->getMessage();
+    include $_SERVER['DOCUMENT_ROOT'] . '/inc/error.html.php';
+    exit();
+}
