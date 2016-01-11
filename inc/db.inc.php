@@ -5,7 +5,7 @@ try{
     $pdo->exec('SET NAMES "utf8"');
 }
 catch(PDOException $e){
-    $error = 'error connecting to database: ' . $e->getMessage();
+    $error = 'Error connecting to database: ' . $e->getMessage();
     include 'error.html.php';
     exit();
 }
