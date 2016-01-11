@@ -23,20 +23,21 @@
         <![endif]-->
     </head>
     <body>
-        <?php include 'inc/nav.inc.html.php'; ?>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/nav.html.php'; ?>
 
         <div class="main">
             <div class="container">
                 <div class="panel-group">
-                    <div class="panel panel-warning">
-                        <form name="addForm" method="post" action="php/main.php">
-                            <div class="panel-heading">To do</div>
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <button type="submit" class="btn btn-primary disabled">Add work</button>
+                        </div>
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-1">
                                         <div class="form-group">
                                             <label for="id">#:</label>
-                                            <input type="text" class="form-control" id="id" name="id" value="{{id}}">
+                                            <input type="text" class="form-control" id="id" name="id" disabled value="{{id}}">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -60,9 +61,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary disabled">Add work</button>
                             </div>
-                        </form>
                     </div>
 
                     <div class="panel panel-info">
@@ -72,18 +71,19 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Case</th>
+                                    <th>Work</th>
                                     <th>Time</th>
                                     <th>Remaining time</th>
                                     <th>Comment</th>
-                                    <th>Control</th>
+                                    <th>Timer</th>
+                                    <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <td>{{id}}</td>
-                                    <td>{{case}}</td>
+                                    <td>{{work}}</td>
                                     <td>{{time}}</td>
                                     <td>{{remainingTime}}</td>
                                     <td>{{comment}}</td>
@@ -98,6 +98,7 @@
                                             </button>
                                         </div>
                                     </td>
+                                    <th><button type="button" class="btn btn-info btn-xs">Edit</button> </th>
                                     <th><button type="button" class="btn btn-danger btn-xs">Delete</button></th>
                                 </tr>
                                 <tr>
@@ -108,15 +109,16 @@
                                     <td>Problems with configmanager</td>
                                     <td>
                                         <div class="player">
-                                            <button type="button" id="button_play" class="btn btn-xs" onclick='buttonPlayPress()'>
-                                                <i class="fa fa-play"></i>
-                                            </button>
-
-                                            <button type="button" id="button_stop" class="btn btn-xs" onclick='buttonStopPress()'>
-                                                <i class="fa fa-stop"></i>
-                                            </button>
+<!--                                            <button type="button" id="button_play" class="btn btn-xs" onclick='buttonPlayPress()'>-->
+<!--                                                <i class="fa fa-play"></i>-->
+<!--                                            </button>-->
+<!---->
+<!--                                            <button type="button" id="button_stop" class="btn btn-xs" onclick='buttonStopPress()'>-->
+<!--                                                <i class="fa fa-stop"></i>-->
+<!--                                            </button>-->
                                         </div>
                                     </td>
+                                    <th><button type="button" class="btn btn-info btn-xs">Edit</button> </th>
                                     <th><button type="button" class="btn btn-danger btn-xs">Delete</button></th>
                                 </tr>
                                 <tr>
@@ -127,15 +129,16 @@
                                     <td>Add AngularJS</td>
                                     <td>
                                         <div class="player">
-                                            <button type="button" id="button_play" class="btn btn-xs" onclick='buttonPlayPress()'>
-                                                <i class="fa fa-play"></i>
-                                            </button>
-
-                                            <button type="button" id="button_stop" class="btn btn-xs" onclick='buttonStopPress()'>
-                                                <i class="fa fa-stop"></i>
-                                            </button>
+<!--                                            <button type="button" id="button_play" class="btn btn-xs" onclick='buttonPlayPress()'>-->
+<!--                                                <i class="fa fa-play"></i>-->
+<!--                                            </button>-->
+<!---->
+<!--                                            <button type="button" id="button_stop" class="btn btn-xs" onclick='buttonStopPress()'>-->
+<!--                                                <i class="fa fa-stop"></i>-->
+<!--                                            </button>-->
                                         </div>
                                     </td>
+                                    <th><button type="button" class="btn btn-info btn-xs">Edit</button> </th>
                                     <th><button type="button" class="btn btn-danger btn-xs">Delete</button></th>
                                 </tr>
                                 </tbody>
@@ -146,7 +149,7 @@
             </div>
         </div>
 
-        <?php include 'inc/footer.inc.html.php' ?>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.html.php'; ?>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
