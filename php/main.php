@@ -71,7 +71,7 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>#</th><th>Work</th><th>Time</th><th>Remaining time</th><th>Comment</th><th>Timer</th><th>Edit</th><th>Delete</th>
+                            <th>#</th><th>Work</th><th>Time</th><th>Remaining time</th><th>Comment</th><th>Status</th><th>Timer</th><th>Edit</th><th>Delete</th>
                         </tr>
                         </thead>
                         <tbody>
