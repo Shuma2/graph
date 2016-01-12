@@ -67,84 +67,39 @@
             <div class="panel panel-info">
                 <div class="panel-heading">List for <?php htmlOut(date('d.m.Y')); ?></div>
                 <div class="panel-body">
+                    <?php if(isset($resultTable)): ?>
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Work</th>
-                            <th>Time</th>
-                            <th>Remaining time</th>
-                            <th>Comment</th>
-                            <th>Timer</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th>#</th><th>Work</th><th>Time</th><th>Remaining time</th><th>Comment</th><th>Timer</th><th>Edit</th><th>Delete</th>
                         </tr>
                         </thead>
-                        <?php if(isset($resultTable)): ?>
                         <tbody>
-                            <?php foreach($resultTable as $table): ?>
-                            <tr>
-                                <td><?php htmlOut($table['id']); ?></td>
-                                <td><?php htmlOut($table['work']); ?></td>
-                                <td><?php htmlOut($table['workTime']); ?></td>
-                                <td>{{remainingTime}}</td>
-                                <td>{{comment}}</td>
-                                <td>
-                                    <div class="player">
-                                        <button type="button" id="button_play" class="btn btn-xs" onclick='buttonPlayPress()'>
-                                            <i class="fa fa-play"></i>
-                                        </button>
+                                <?php foreach($resultTable as $key => $table): ?>
+                                    <tr>
+                                        <td><?php htmlOut($key + 1); //выводить отсчёт с 1 каждый день ?></td>
+                                        <td><?php htmlOut($table['work']); ?></td>
+                                        <td><?php htmlOut($table['workTime']); ?></td>
+                                        <td>{{remainingTime}}</td>
+                                        <td><?php htmlOut($table['comment']); ?></td>
+                                        <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/php/status.php'; ?></td>
+                                        <td>
+                                            <div class="player">
+                                                <button type="button" id="button_play" class="btn btn-xs" onclick='buttonPlayPress()'>
+                                                    <i class="fa fa-play"></i>
+                                                </button>
 
-                                        <button type="button" id="button_stop" class="btn btn-xs" onclick='buttonStopPress()'>
-                                            <i class="fa fa-stop"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                                <th><button type="button" class="btn btn-info btn-xs">Edit</button> </th>
-                                <th><button type="button" class="btn btn-danger btn-xs">Delete</button></th>
-                            </tr>
-                            <?php endforeach; ?>
+                                                <button type="button" id="button_stop" class="btn btn-xs" onclick='buttonStopPress()'>
+                                                    <i class="fa fa-stop"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <th><button type="button" class="btn btn-info btn-xs">Edit</button> </th>
+                                        <th><button type="button" class="btn btn-danger btn-xs">Delete</button></th>
+                                    </tr>
+                                <?php endforeach; ?>
                         <?php elseif(!isset($resultTable)): ?>
-<!--                            <tr>-->
-<!--                                <td>2</td>-->
-<!--                                <td>AARBI</td>-->
-<!--                                <td>60</td>-->
-<!--                                <td>40</td>-->
-<!--                                <td>Problems with configmanager</td>-->
-<!--                                <td>-->
-<!--                                    <div class="player">-->
-<!--                                        <!--                                            <button type="button" id="button_play" class="btn btn-xs" onclick='buttonPlayPress()'>-->-->
-<!--                                        <!--                                                <i class="fa fa-play"></i>-->-->
-<!--                                        <!--                                            </button>-->-->
-<!--                                        <!---->-->
-<!--                                        <!--                                            <button type="button" id="button_stop" class="btn btn-xs" onclick='buttonStopPress()'>-->-->
-<!--                                        <!--                                                <i class="fa fa-stop"></i>-->-->
-<!--                                        <!--                                            </button>-->-->
-<!--                                    </div>-->
-<!--                                </td>-->
-<!--                                <th><button type="button" class="btn btn-info btn-xs">Edit</button> </th>-->
-<!--                                <th><button type="button" class="btn btn-danger btn-xs">Delete</button></th>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td>3</td>-->
-<!--                                <td>Graph</td>-->
-<!--                                <td>180</td>-->
-<!--                                <td>60</td>-->
-<!--                                <td>Add AngularJS</td>-->
-<!--                                <td>-->
-<!--                                    <div class="player">-->
-<!--                                        <!--                                            <button type="button" id="button_play" class="btn btn-xs" onclick='buttonPlayPress()'>-->-->
-<!--                                        <!--                                                <i class="fa fa-play"></i>-->-->
-<!--                                        <!--                                            </button>-->-->
-<!--                                        <!---->-->
-<!--                                        <!--                                            <button type="button" id="button_stop" class="btn btn-xs" onclick='buttonStopPress()'>-->-->
-<!--                                        <!--                                                <i class="fa fa-stop"></i>-->-->
-<!--                                        <!--                                            </button>-->-->
-<!--                                    </div>-->
-<!--                                </td>-->
-<!--                                <th><button type="button" class="btn btn-info btn-xs">Edit</button> </th>-->
-<!--                                <th><button type="button" class="btn btn-danger btn-xs">Delete</button></th>-->
-<!--                            </tr>-->
+                                <h3 id="notificationNoNotes">Sorry, no notes today</h3>
                             </tbody>
                         <?php endif; ?>
                     </table>
