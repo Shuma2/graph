@@ -8,7 +8,7 @@ elseif($table['status'] == 1){
 elseif($table['status'] == 2){
     echo 'In progress';
 }
-elseif($table['status'] == 4){
+elseif($table['status'] == 3){
     echo 'Waiting';
 }
 else{
