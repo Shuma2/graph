@@ -77,7 +77,7 @@
                         <tbody>
                                 <?php foreach($resultTable as $key => $table): ?>
                                     <tr>
-                                        <td><?php htmlOut($key + 1); //выводить отсчёт с 1 каждый день ?></td>
+                                        <td><?php htmlOut($key + 1); //выводит отсчёт с 1 каждый день ?></td>
                                         <td><?php htmlOut($table['work']); ?></td>
                                         <td><?php htmlOut($table['workTime']); ?></td>
                                         <td>{{remainingTime}}</td>
