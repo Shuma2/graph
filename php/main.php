@@ -28,9 +28,10 @@
 <div class="main">
     <div class="container">
         <div class="panel-group">
+            <form action="" method="post">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <button type="submit" class="btn btn-primary disabled">Add work</button>
+                    <button type="submit" name="action" value="addWork" class="btn btn-primary disabled">Add work</button>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -63,6 +64,7 @@
                     </div>
                 </div>
             </div>
+            </form>
 
             <div class="panel panel-info">
                 <div class="panel-heading">List for <?php htmlOut(date('d.m.Y')); ?></div>

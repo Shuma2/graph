@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1:3330
--- Generation Time: Jan 12, 2016 at 03:11 PM
+-- Generation Time: Jan 21, 2016 at 05:53 PM
 -- Server version: 5.5.45
 -- PHP Version: 5.6.12
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `graph`
 --
+CREATE DATABASE IF NOT EXISTS `graph` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `graph`;
 
 -- --------------------------------------------------------
 
@@ -26,21 +28,27 @@ SET time_zone = "+00:00";
 -- Table structure for table `work`
 --
 
+DROP TABLE IF EXISTS `work`;
 CREATE TABLE IF NOT EXISTS `work` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `work` varchar(255) NOT NULL,
+  `main` varchar(255) NOT NULL,
   `worktime` int(11) NOT NULL,
   `workdate` date NOT NULL,
   `status` tinyint(4) NOT NULL,
   `comment` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
 
+--
+-- Truncate table before insert `work`
+--
+
+TRUNCATE TABLE `work`;
 --
 -- Dumping data for table `work`
 --
 
-INSERT INTO `work` (`id`, `work`, `worktime`, `workdate`, `status`, `comment`) VALUES
+INSERT INTO `work` (`id`, `main`, `worktime`, `workdate`, `status`, `comment`) VALUES
 (1, 'Graph', 180, '2016-01-11', 0, NULL),
 (2, 'AARBI', 60, '2016-01-11', 0, NULL),
 (3, 'Jokes control', 160, '2016-01-11', 0, NULL),
@@ -66,7 +74,10 @@ INSERT INTO `work` (`id`, `work`, `worktime`, `workdate`, `status`, `comment`) V
 (24, 'Memoris', 15, '2016-01-12', 1, 'Need to work man!'),
 (25, 'Memoris', 15, '2016-01-12', 1, 'Need to work man! Because it depends on it your future'),
 (27, 'English', 15, '2016-01-12', 4, 'It depends on it your future!'),
-(28, 'English', 15, '2016-01-12', 5, 'Iit depends on it your future!');
+(28, 'English', 15, '2016-01-12', 5, 'Iit depends on it your future!'),
+(29, 'Harry Potter', 20, '2016-01-13', 3, 'In my profession need to know English'),
+(30, 'Ianc', 300, '2016-01-13', 2, 'Learn php'),
+(31, 'Ianc', 300, '2016-01-21', 2, 'Learn php');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
