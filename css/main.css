@@ -6,3 +6,11 @@
 #notificationNoNotes{
     text-align: center;
 }
+
+#comment {
+    resize: none;
+}
+
+#hiddenIdRow {
+    display: none;
+}
