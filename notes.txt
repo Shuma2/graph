@@ -1,0 +1,2 @@
+To fast INSERT for tests:
+INSERT INTO work SET main = 'Graph6', worktime = (RAND() * 401) + 10, workdate = CURDATE(), status = 3, comment = 'OHOH';

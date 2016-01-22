@@ -26,44 +26,11 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/nav.html.php'; ?>
 
 <div class="main">
+
     <div class="container">
         <div class="panel-group">
             <form action="" method="post">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <button type="submit" name="action" value="addWork" class="btn btn-primary disabled">Add work</button>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label for="id">#:</label>
-                                <input type="text" class="form-control" id="id" name="id" disabled value="{{id}}">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="workToDo">Work:</label>
-                                <input type="text" class="form-control" id="workToDo" name="workToDo" placeholder="What need to do">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="time">Time:</label>
-                                <input type="text" class="form-control" id="time" name="time" placeholder="Enter time in minutes">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="comment">Comment:</label>
-                                <textarea class="form-control" rows="3" id="comment" name="comment" placeholder="Comment will be displayed, when you will hover the cursor in the list"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/insert.php'; ?>
             </form>
 
             <div class="panel panel-info">
@@ -96,8 +63,13 @@
                                                 </button>
                                             </div>
                                         </td>
-                                        <th><button type="button" class="btn btn-info btn-xs">Edit</button> </th>
-                                        <th><button type="button" class="btn btn-danger btn-xs">Delete</button></th>
+                                        <form action="?" method="post">
+                                            <div>
+                                                <td id="hiddenIdRow"><input type="hidden" name="id" value="<?php echo $table['id']; ?>"></td>
+                                                <td><input type="submit" name="control" class="btn btn-info btn-xs" value="Edit"></td>
+                                                <td><input type="submit" name="control" class="btn btn-danger btn-xs" value="Delete"></td>
+                                            </div>
+                                        </form>
                                     </tr>
                                 <?php endforeach; ?>
                         <?php elseif(!isset($resultTable)): ?>
@@ -110,7 +82,6 @@
         </div>
     </div>
 </div>
-
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.html.php'; ?>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
