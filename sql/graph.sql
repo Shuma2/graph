@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1:3330
--- Generation Time: Jan 21, 2016 at 05:53 PM
+-- Generation Time: Jan 22, 2016 at 05:48 PM
 -- Server version: 5.5.45
 -- PHP Version: 5.6.12
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `graph`
 --
-CREATE DATABASE IF NOT EXISTS `graph` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `graph`;
 
 -- --------------------------------------------------------
 
@@ -37,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `work` (
   `status` tinyint(4) NOT NULL,
   `comment` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=87 ;
 
 --
 -- Truncate table before insert `work`
@@ -77,7 +75,19 @@ INSERT INTO `work` (`id`, `main`, `worktime`, `workdate`, `status`, `comment`) V
 (28, 'English', 15, '2016-01-12', 5, 'Iit depends on it your future!'),
 (29, 'Harry Potter', 20, '2016-01-13', 3, 'In my profession need to know English'),
 (30, 'Ianc', 300, '2016-01-13', 2, 'Learn php'),
-(31, 'Ianc', 300, '2016-01-21', 2, 'Learn php');
+(31, 'Ianc', 300, '2016-01-21', 2, 'Learn php'),
+(66, 'Graph3', 120, '2016-01-22', 3, 'OHOH'),
+(70, 'Graph6', 182, '2016-01-22', 3, 'OHOH'),
+(74, 'Graph6', 100, '2016-01-22', 3, 'OHOH'),
+(75, 'Graph6', 189, '2016-01-22', 3, 'OHOH'),
+(76, 'Graph6', 32, '2016-01-22', 3, 'OHOH'),
+(77, 'Graph6', 186, '2016-01-22', 3, 'OHOH'),
+(78, 'Test', 900, '2016-01-22', 3, 'aloha'),
+(79, 'TEST', 314, '2016-01-22', 3, 'test'),
+(80, 'TEST', 1, '2016-01-22', 3, '!'),
+(81, 'TEST', 2, '2016-01-22', 3, '2'),
+(82, '31', 312, '2016-01-22', 3, '123'),
+(83, 'TEST3213', 24213, '2016-01-22', 3, '212312');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
