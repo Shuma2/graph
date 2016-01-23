@@ -29,7 +29,7 @@
 
     <div class="container">
         <div class="panel-group">
-            <form action="" method="post">
+            <form action="" method="get">
             <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/insert.php'; ?>
             </form>
 

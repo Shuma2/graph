@@ -17,7 +17,7 @@ function countNumberOfWork() { //подсчёт кол-ва записел в п
     htmlOut($row[0] + 1);
 }
 
-if(isset($_POST['action']) == 'addWork') { //нажатие кнопки "Add work"
+if(isset($_POST['action']) && $_POST['action'] == 'addWork') { //нажатие кнопки "Add work"
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
     $insert = 'INSERT INTO work SET ';
@@ -75,7 +75,7 @@ if(isset($_POST['control']) && $_POST['control'] == 'Delete') { //удалени
     exit();
 }
 
-if(isset($_POST['control']) && $_POST['control'] == 'Edit') {
+if(isset($_POST['control']) && $_POST['control'] == 'Edit') { //нажатие кнопки "Edit" в таблице
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
     try{
@@ -96,13 +96,13 @@ if(isset($_POST['control']) && $_POST['control'] == 'Edit') {
     $commentForWork = $row['comment'];
 }
 
-if(isset($_POST['action']) == 'editWork') { //разобраться с UPDATE
+if(isset($_GET['editWork'])) { //разобраться с UPDATE
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
     try{
         $sql = 'UPDATE work SET main = :main, worktime = :worktime, comment = :comment WHERE id = :id';
         $s = $pdo->prepare($sql);
-        $s->bindValue(':main', $workToDo);
+        $s->bindValue(':main', $_POST['workToDo']);
         $s->bindValue(':worktime', $timeForWork);
         $s->bindValue(':comment', $commentForWork);
         $s->bindValue(':id', $table['id']);
