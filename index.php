@@ -96,7 +96,7 @@ if(isset($_POST['control']) && $_POST['control'] == 'Edit') { //нажатие �
     $commentForWork = $row['comment'];
 }
 
-if(isset($_GET['editWork'])) { //разобраться с UPDATE
+if(isset($_GET['editWork'])) { //разобраться с UPDATE и какие должны быть методы заголовков
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
     try{
