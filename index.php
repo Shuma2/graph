@@ -1,6 +1,9 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/inc/helpers.inc.php';
 
+$button = 'Add work';
+
+
 function countNumberOfWork() { //подсчёт кол-ва записел в поле #
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
@@ -17,9 +20,10 @@ function countNumberOfWork() { //подсчёт кол-ва записел в п
     htmlOut($row[0] + 1);
 }
 
-if(isset($_POST['action']) && $_POST['action'] == 'addWork') { //нажатие кнопки "Add work"
+if(isset($_POST['action']) == 'addWork') { //нажатие кнопки "Add work"
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
+    $action = 'addWork';
     $insert = 'INSERT INTO work SET ';
     $work = ' main = :main,';
     $time = ' worktime = :time,';
@@ -59,6 +63,25 @@ if(isset($_POST['action']) && $_POST['action'] == 'addWork') { //нажатие 
     exit();
 }
 
+if(isset($_POST['action']) == 'editWork') { //разобраться с UPDATE и какие должны быть методы заголовков
+    include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
+
+    try{
+        $sql = 'UPDATE work SET main = :main, worktime = :worktime, comment = :comment WHERE id = :id';
+        $s = $pdo->prepare($sql);
+        $s->bindValue(':main', $workToDo);
+        $s->bindValue(':worktime', $timeForWork);
+        $s->bindValue(':comment', $commentForWork);
+        $s->bindValue(':id', $id);
+        $s->execute();
+    }
+    catch(PDOException $e){
+        errorText('Unable to update values: ', $e);
+    }
+    header('Location: .');
+    exit();
+}
+
 if(isset($_POST['control']) && $_POST['control'] == 'Delete') { //удаление поля
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
@@ -78,10 +101,11 @@ if(isset($_POST['control']) && $_POST['control'] == 'Delete') { //удалени
 if(isset($_POST['control']) && $_POST['control'] == 'Edit') { //нажатие кнопки "Edit" в таблице
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
+    $id = $_POST['id'];
     try{
         $sql = 'SELECT id, main, worktime, comment FROM work WHERE id = :id';
         $s = $pdo->prepare($sql);
-        $s->bindValue(':id', $_POST['id']);
+        $s->bindValue(':id', $id);
         $s->execute();
     }
     catch(PDOException $e) {
@@ -90,29 +114,11 @@ if(isset($_POST['control']) && $_POST['control'] == 'Edit') { //нажатие �
 
     $row = $s->fetch();
 
+    $action = 'editWork';
     $button = 'Update';
     $workToDo = $row['main'];
     $timeForWork = $row['worktime'];
     $commentForWork = $row['comment'];
-}
-
-if(isset($_GET['editWork'])) { //разобраться с UPDATE и какие должны быть методы заголовков
-    include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
-
-    try{
-        $sql = 'UPDATE work SET main = :main, worktime = :worktime, comment = :comment WHERE id = :id';
-        $s = $pdo->prepare($sql);
-        $s->bindValue(':main', $_POST['workToDo']);
-        $s->bindValue(':worktime', $timeForWork);
-        $s->bindValue(':comment', $commentForWork);
-        $s->bindValue(':id', $table['id']);
-        $s->execute();
-    }
-    catch(PDOException $e){
-        errorText('Unable to update values: ', $e);
-    }
-    header('Location: .');
-    exit();
 }
 
 //SELECT в главную таблицу

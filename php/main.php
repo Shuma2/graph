@@ -23,16 +23,14 @@
     <![endif]-->
 </head>
 <body>
+
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/nav.html.php'; ?>
 
 <div class="main">
-
     <div class="container">
         <div class="panel-group">
-            <form action="" method="get">
+            <form action="" method="post">
             <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/insert.php'; ?>
-            </form>
-
             <div class="panel panel-info">
                 <div class="panel-heading">List for <?php htmlOut(date('d.m.Y')); ?></div>
                 <div class="panel-body">
@@ -63,7 +61,7 @@
                                                 </button>
                                             </div>
                                         </td>
-                                        <form action="?" method="post">
+                                        <form action="" method="post">
                                             <div>
                                                 <td id="hiddenIdRow"><input type="hidden" name="id" value="<?php echo $table['id']; ?>"></td>
                                                 <td><input type="submit" name="control" class="btn btn-info btn-xs" value="Edit"></td>
@@ -79,6 +77,7 @@
                     </table>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 </div>
