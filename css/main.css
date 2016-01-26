@@ -14,3 +14,7 @@
 #hiddenIdRow {
     display: none;
 }
+
+#errorEmpty{
+    color: red;
+}

@@ -8,7 +8,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/inc/helpers.inc.php';
 function countNumberOfWork() { //подсчёт кол-ва записел в поле #
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
-    if(isset($_POST['control']) && $_POST['control'] == 'Edit'){
+    if(isset($_POST['control']) && $_POST['control'] == 'Edit'){ //подсчёт при реадктировании
         try{
             $result = $pdo->query('SELECT id FROM work WHERE workdate = CURDATE()');
         }
@@ -20,7 +20,6 @@ function countNumberOfWork() { //подсчёт кол-ва записел в п
         foreach($result as $row) {
             $nowID[] = array('id' => $row['id']);
         }
-        $count = count($nowID);
 
         foreach($nowID as $key => $id){
             if(in_array($post, $id)){
@@ -28,7 +27,7 @@ function countNumberOfWork() { //подсчёт кол-ва записел в п
             }
         }
     }
-    else{
+    else{ //подсчёт при обычной форме
         try{
             $result = 'SELECT COUNT(*) AS num FROM work WHERE workdate = CURDATE()';
             $s = $pdo->prepare($result);
