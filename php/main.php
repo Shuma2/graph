@@ -30,7 +30,44 @@
     <div class="container">
         <div class="panel-group">
             <form action="" method="post">
-            <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/insert.php'; ?>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <input type="submit" name="action" class="btn btn-primary" value="Add Work">
+                        <input type="submit" name="action" class="btn btn-primary" value="Update">
+                    </div>
+                    <input type="hidden" name="id" value="<?php echo $id; ?>">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="id">#:</label>
+                                    <input type="number" class="form-control" id="idWork" name="idWork" disabled value="<?php countNumberOfWork(); ?>">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="workToDo">Work:</label>
+                                    <input type="text" class="form-control" id="workToDo" name="workToDo" placeholder="What need to do" value="<?php htmlOut($workToDo); ?>">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="time">Time:</label>
+                                    <input type="text" class="form-control" id="time" name="time" placeholder="Enter time in minutes" value="<?php htmlOut($timeForWork) ; ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="comment">Comment:</label>
+                                    <textarea class="form-control" rows="3" id="comment" name="comment" placeholder="Comment will be displayed, when you will hover the cursor in the list (future feature)"><?php htmlOut($commentForWork);?></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
             <div class="panel panel-info">
                 <div class="panel-heading">List for <?php htmlOut(date('d.m.Y')); ?></div>
                 <div class="panel-body">
@@ -61,7 +98,7 @@
                                                 </button>
                                             </div>
                                         </td>
-                                        <form action="" method="post">
+                                        <form action="?" method="post">
                                             <div>
                                                 <td id="hiddenIdRow"><input type="hidden" name="id" value="<?php echo $table['id']; ?>"></td>
                                                 <td><input type="submit" name="control" class="btn btn-info btn-xs" value="Edit"></td>
@@ -77,7 +114,7 @@
                     </table>
                 </div>
             </div>
-            </form>
+
         </div>
     </div>
 </div>
