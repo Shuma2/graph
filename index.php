@@ -22,12 +22,11 @@ function countNumberOfWork() { //подсчёт кол-ва записел в п
         }
         $count = count($nowID);
 
-        var_dump($nowID);
-//        for($i = 1; $i <= $count; $i++) {
-//            if($nowID['id'] == $post){
-//                echo $i;
-//            }
-//        }
+        foreach($nowID as $key => $id){
+            if(in_array($post, $id)){
+                echo $key + 1;
+            }
+        }
     }
     else{
         try{

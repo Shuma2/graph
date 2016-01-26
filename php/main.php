@@ -32,8 +32,11 @@
             <form action="" method="post">
                 <div class="panel panel-success">
                     <div class="panel-heading">
+                        <?php if(isset($_POST['control']) && $_POST['control'] == 'Edit'): ?>
+                        <input type="submit" name="action" class="btn btn-info" value="Update">
+                        <?php else: ?>
                         <input type="submit" name="action" class="btn btn-primary" value="Add Work">
-                        <input type="submit" name="action" class="btn btn-primary" value="Update">
+                        <?php endif; ?>
                     </div>
                     <input type="hidden" name="id" value="<?php echo $id; ?>">
                     <div class="panel-body">
