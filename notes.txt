@@ -1,2 +1,4 @@
 To fast INSERT for tests:
 INSERT INTO work SET main = concat('Graph|', floor((RAND() * 101) + 10)), worktime = 90, workdate = CURDATE(), status = 3, comment = 'TEST';
+
+Need to add session for checking if fields are filled.
