@@ -2,9 +2,9 @@
 -- version 4.0.10.10
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1:3330
--- Generation Time: Jan 22, 2016 at 05:48 PM
--- Server version: 5.5.45
+-- Host: 127.0.0.1:3306
+-- Generation Time: Jan 27, 2016 at 08:52 PM
+-- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -34,8 +34,9 @@ CREATE TABLE IF NOT EXISTS `work` (
   `workdate` date NOT NULL,
   `status` tinyint(4) NOT NULL,
   `comment` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=87 ;
+  PRIMARY KEY (`id`),
+  KEY `date` (`workdate`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=110 ;
 
 --
 -- Truncate table before insert `work`
@@ -87,7 +88,20 @@ INSERT INTO `work` (`id`, `main`, `worktime`, `workdate`, `status`, `comment`) V
 (80, 'TEST', 1, '2016-01-22', 3, '!'),
 (81, 'TEST', 2, '2016-01-22', 3, '2'),
 (82, '31', 312, '2016-01-22', 3, '123'),
-(83, 'TEST3213', 24213, '2016-01-22', 3, '212312');
+(83, 'TEST3213', 24213, '2016-01-22', 3, '212312'),
+(85, 'Graph2', 227, '2016-01-23', 3, 'TEST'),
+(87, 'Graph4', 32, '2016-01-23', 3, 'TEST'),
+(89, 'Graph5', 296, '2016-01-23', 3, 'TEST'),
+(90, 'Graph7', 130, '2016-01-23', 3, 'TEST'),
+(91, 'Graph|20', 90, '2016-01-26', 3, 'TEST'),
+(92, 'Graph|99', 90, '2016-01-26', 3, 'TEST'),
+(93, 'Graph|1022', 90, '2016-01-26', 3, 'TEST'),
+(94, 'Graph|14', 90, '2016-01-26', 3, 'TEST'),
+(95, 'Graph|84', 90, '2016-01-27', 3, 'TEST'),
+(96, 'Graph|78', 90, '2016-01-27', 3, 'TEST'),
+(105, 'Graph|196', 90, '2016-01-27', 3, 'TEST'),
+(106, 'Graph|90', 90, '2016-01-27', 3, 'TEST'),
+(109, 'Graph|95', 90, '2016-01-27', 3, 'TEST');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
