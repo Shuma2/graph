@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <link rel="shortcut icon" href="favicon.png" type="image/png">
+
+    <?php echo $emptyWork;
+    echo $emptyTime; ?>
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -36,6 +40,7 @@
                         <input type="submit" name="action" class="btn btn-info" value="Update">
                         <?php else: ?>
                         <input type="submit" name="action" class="btn btn-primary" value="Add Work">
+                            <input type="submit" name="random" class="btn btn-default" value="Add random"> <!-- button "Add random" only for developing -->
                         <?php endif; ?>
                     </div>
                     <input type="hidden" name="id" value="<?php echo $id; ?>">
@@ -50,13 +55,13 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="workToDo">Work:</label>
-                                    <input type="text" class="form-control" id="workToDo" name="workToDo" placeholder="What need to do" value="<?php htmlOut($workToDo); ?>">
+                                    <input type="text" class="form-control" id="workToDo" name="workToDo" placeholder="<?php echo $placeholderWork; ?>" value="<?php htmlOut($workToDo); ?>">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="time">Time:</label>
-                                    <input type="text" class="form-control" id="time" name="time" placeholder="Enter time in minutes" value="<?php htmlOut($timeForWork) ; ?>">
+                                    <input type="text" class="form-control" id="time" name="time" placeholder="<?php echo $placeholderTime; ?>" value="<?php htmlOut($timeForWork) ; ?>">
                                 </div>
                             </div>
                         </div>

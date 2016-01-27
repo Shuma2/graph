@@ -56,8 +56,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'Add Work') { //нажатие
     $placeholders = array();
 
     if(($_POST['workToDo']) == '' || ($_POST['time']) == ''){
-        $error = 'Need to fill both fields';
-        include $_SERVER['DOCUMENT_ROOT'] . '/inc/error.html.php';
+        header('Location: index.php?error');
         exit();
     }
 
@@ -142,6 +141,30 @@ if(isset($_POST['control']) && $_POST['control'] == 'Edit') { //нажатие �
     $workToDo = $row['main'];
     $timeForWork = $row['worktime'];
     $commentForWork = $row['comment'];
+}
+
+if(isset($_POST['random']) == 'Add random'){
+    include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
+
+    try{
+        $result = $pdo->query('INSERT INTO work SET main = concat(\'Graph|\', floor((RAND() * 201) + 10)), worktime = 90, workdate = CURDATE(), status = 3, comment = \'TEST\'');
+    }
+    catch(PDOException $e) {
+        errorText('Unable to insert random work: ', $e);
+    }
+
+    header('Location: .');
+    exit();
+}
+
+$placeholderWork = 'What to do';
+$placeholderTime = 'Time for work';
+
+if(isset($_GET['error'])){
+    $placeholderWork = 'Need to fill that field';
+    $placeholderTime = 'Need to fill that field';
+    $emptyWork = '<style>' . '#workToDo::-webkit-input-placeholder{color:#FF0000;} #workToDo::-moz-placeholder{color:#FF0000;} #workToDo:-ms-input-placeholder{color:#FF0000;}' . '</style>';
+    $emptyTime = '<style>' . '#time::-webkit-input-placeholder{color:#FF0000;} #time::-moz-placeholder{color:#FF0000;} #time:-ms-input-placeholder{color:#FF0000;}' . '</style>';
 }
 
 //SELECT в главную таблицу
