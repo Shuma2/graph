@@ -8,12 +8,12 @@
     <title>Graph</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/menu.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/menu.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
-    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
 
     <?php echo $emptyWork;
     echo $emptyTime; ?>

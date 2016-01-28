@@ -157,7 +157,7 @@ if(isset($_POST['random']) == 'Add random'){
     exit();
 }
 
-$placeholderWork = 'What to do';
+$placeholderWork = 'What need to do';
 $placeholderTime = 'Time for work';
 
 if(isset($_GET['error'])){
