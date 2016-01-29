@@ -18,6 +18,11 @@
 #errorEmpty{
     color: red;
 }
+
+.archive:hover {
+    background-color: lightgrey;
+}
+
 /*switch off scrollbar*/
 #comment{
     overflow: hidden;

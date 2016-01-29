@@ -94,7 +94,7 @@
                                         <td><?php htmlOut($table['workTime']); ?></td>
                                         <td>{{remainingTime}}</td>
                                         <td><?php htmlOut($table['comment']); ?></td>
-                                        <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/php/status.php'; ?></td>
+                                        <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.php'; ?></td>
                                         <td>
                                             <div class="player">
                                                 <button type="button" id="button_play" class="btn btn-xs" onclick='buttonPlayPress()'>
