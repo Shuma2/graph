@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="shortcut icon" href="/favicon.png" type="image/png">
 
+    <!--  Colapse  -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,7 +29,12 @@
 <body>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/nav.html.php'; ?>
 <div class="container">
-    <p>do here "open all" and "collapse all"</p>
+    <script>$(document).ready(function(){ //раскрытие/закрытие всех панелей
+            $(".btn-success").click(function(){
+                $(".collapse").collapse('toggle');
+            });
+        });</script>
+    <p><button type="button" class="btn btn-success">Show</button></p>
     <p>do here "search"</p>
     <div class="panel-group" id="accordion">
         <?php foreach($datesUnique as $key => $nowDate): //перебор по дате (каждая дата выводится только 1 раз)
