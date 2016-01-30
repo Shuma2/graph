@@ -21,6 +21,8 @@ foreach($result as $row)
         'worktime' => $row['worktime'],
         'status' => $row['status'],
         'comment' => $row['comment']);
+    $dates[] = $row['workdate'];
 }
+$datesUnique = array_unique($dates); //удаление дубликатов из  $dates[] = $row['workdate'];
 
 include 'archive.html.php';

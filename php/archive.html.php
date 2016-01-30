@@ -28,34 +28,36 @@
     <p>do here "open all" and "collapse all"</p>
     <p>do here "search"</p>
     <div class="panel-group" id="accordion">
-        <?php foreach($allDates as $key => $date): ?>
-            <?php $nowDate = $date['workdate']; ?>
+        <?php foreach($datesUnique as $key => $nowDate): //перебор по дате (каждая дата выводится только 1 раз)?>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $key + 1; ?>"><?php htmlOut($date['workdate']); ?></a>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $key + 1; ?>"><?php htmlOut($nowDate); ?></a>
                 </h4>
             </div>
             <div id="collapse<?php echo $key + 1; ?>" class="panel-collapse collapse">
                 <div class="panel-body">
                     <table class="table table-striped">
-                        <?php if(isset($date)): ?>
+                        <?php if(isset($nowDate)): ?>
                         <thead>
                         <tr>
                             <th>#</th><th>Work</th><th>Time</th><th>Remaining time</th><th>Comment</th><th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
+                            <?php foreach($allDates as $key2 => $data): ?>
+                                <?php if($data['workdate'] == $nowDate): ?>
                             <tr>
                                 <td><?php htmlOut($key2 + 1); //выводит отсчёт с 1 каждый день ?></td>
-                                <td><?php htmlOut($date['main']); ?></td>
-                                <td><?php htmlOut($date['worktime']); ?></td>
+                                <td><?php htmlOut($data['main']); ?></td>
+                                <td><?php htmlOut($data['worktime']); ?></td>
                                 <td>{{remainingTime}}</td>
-                                <td><?php htmlOut($date['comment']); ?></td>
+                                <td><?php htmlOut($data['comment']); ?></td>
                                 <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.archive.php'; ?></td>
                             </tr>
-                        <?php elseif(!isset($date)): ?>
-                        <h3 id="notificationNoNotes">Sorry, no notes for <?php htmlOut($date['workdate']); ?></h3>
+                                <?php endif; endforeach; ?>
+                        <?php elseif(!isset($nowDate)): ?>
+                        <h3 id="notificationNoNotes">Sorry, no notes for <?php htmlOut($nowDate); ?></h3>
                         </tbody>
                         <?php endif; ?>
                     </table>
