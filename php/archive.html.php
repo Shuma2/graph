@@ -28,11 +28,12 @@
     <p>do here "open all" and "collapse all"</p>
     <p>do here "search"</p>
     <div class="panel-group" id="accordion">
-        <?php foreach($datesUnique as $key => $nowDate): //перебор по дате (каждая дата выводится только 1 раз)?>
+        <?php foreach($datesUnique as $key => $nowDate): //перебор по дате (каждая дата выводится только 1 раз)
+            $dateFormat = date_create($nowDate); ?>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $key + 1; ?>"><?php htmlOut($nowDate); ?></a>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $key + 1; ?>"><?php echo date_format($dateFormat, 'd.m.Y'); ?></a>
                 </h4>
             </div>
             <div id="collapse<?php echo $key + 1; ?>" class="panel-collapse collapse">
@@ -45,17 +46,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($allDates as $key2 => $data): ?>
+                            <?php $numberOfRows = 1; foreach($allDates as $key2 => $data): ?>
                                 <?php if($data['workdate'] == $nowDate): ?>
                             <tr>
-                                <td><?php htmlOut($key2 + 1); //выводит отсчёт с 1 каждый день ?></td>
+                                <td><?php htmlOut($numberOfRows); //выводит отсчёт с 1 каждый день ?></td>
                                 <td><?php htmlOut($data['main']); ?></td>
                                 <td><?php htmlOut($data['worktime']); ?></td>
                                 <td>{{remainingTime}}</td>
-                                <td><?php htmlOut($data['comment']); ?></td>
+                                <td><?php echo(substr($data['comment'], 0, 175)); ?></td>
                                 <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.archive.php'; ?></td>
                             </tr>
-                                <?php endif; endforeach; ?>
+                                <?php $numberOfRows++; endif; endforeach; ?>
                         <?php elseif(!isset($nowDate)): ?>
                         <h3 id="notificationNoNotes">Sorry, no notes for <?php htmlOut($nowDate); ?></h3>
                         </tbody>
