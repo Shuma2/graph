@@ -30,11 +30,19 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/nav.html.php'; ?>
 <div class="container">
     <script>$(document).ready(function(){ //раскрытие/закрытие всех панелей
-            $(".btn-success").click(function(){
+            $(".btn-primary").click(function(){
                 $(".collapse").collapse('toggle');
             });
+            $(".btn-success").click(function(){
+                $(".collapse").collapse('show');
+            });
+            $(".btn-warning").click(function(){
+                $(".collapse").collapse('hide');
+            });
         });</script>
-    <p><button type="button" class="btn btn-success">Show</button></p>
+    <p><button type="button" class="btn btn-primary">Toggle</button>
+        <button type="button" class="btn btn-success">Show</button>
+        <button type="button" class="btn btn-warning">Hide</button> </p>
     <p>do here "search"</p>
     <div class="panel-group" id="accordion">
         <?php foreach($datesUnique as $key => $nowDate): //перебор по дате (каждая дата выводится только 1 раз)
@@ -42,7 +50,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $key + 1; ?>"><?php echo date_format($dateFormat, 'd.m.Y'); ?></a>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $key + 1; ?>"><?php htmlOut(date_format($dateFormat, 'd.m.Y')); ?></a>
                 </h4>
             </div>
             <div id="collapse<?php echo $key + 1; ?>" class="panel-collapse collapse">
