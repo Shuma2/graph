@@ -1,27 +1,25 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/inc/helpers.inc.php';
 
-if(isset($_GET['Search']))
+if(isset($_GET['action']) && ($_GET['action']) == 'search')
 {
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
-    $select = 'SELECT main, worktime, workdate, status, comment FROM work ';
-    $work = ' main = :main,';
-    $time = ' worktime = :time,';
-    $comment = ' comment = :comment,';
-    $date = ' workdate = :workdate';
-    $status = ' status = 3;';
+    $select = 'SELECT main, worktime, workdate, status, comment FROM work WHERE ';
+    $work = ' main LIKE "%:main%"';
+    $comment = ' AND comment LIKE "%:comment%"';
+    //$date = ' workdate = :workdate';
 
     $placeholders = array();
 
-//    if(($_GET['searchWork']) == '' && ($_GET['dateSearch']) == '' && ($_GET['commentSearch']) == '') {
+//    if(($_GET['workSearch']) == '' && ($_GET['dateSearch']) == '' && ($_GET['commentSearch']) == '') {
 //        header('Location: archive.php?error');
 //        exit();
 //    }
 
-    if($_GET['searchWork'] != '')
+    if($_GET['workSearch'] != '')
     {
-        $placeholders[':main'] = $_GET['searchWork'];
+        $placeholders[':main'] = $_GET['workSearch'];
     }
 
     if($_GET['dateSearch'] != '')
@@ -35,23 +33,27 @@ if(isset($_GET['Search']))
     }
 
     try{
-        $sql = $select . $work . $time . $comment . $date . $status;
+        $sql = $select . $work . $comment . $date;
         $s = $pdo->prepare($sql);
         $s->execute($placeholders);
     }
     catch(PDOException $e) {
         errorText('Unable to insert query: ', $e);
     }
-    header('Location: .');
+
+    foreach($s as $row)
+    {
+        $searchResult[] = array(
+            'main' => $row['main'],
+            'worktime' => $row['worktime'],
+            'workdate' => $row['workdate'],
+            'status' => $row['status'],
+            'comment' => $row['comment']
+        );
+    }
+    include 'archive.html.php';
     exit();
 }
-
-//if(isset($_GET['error'])){
-//    $placeholderWorkSearch = 'Need to fill that field';
-//    $placeholderDateSearch = 'Need to fill that field';
-//    $emptyWork = '<style>' . '#workToDo::-webkit-input-placeholder{color:#FF0000;} #workToDo::-moz-placeholder{color:#FF0000;} #workToDo:-ms-input-placeholder{color:#FF0000;}' . '</style>';
-//    $emptyTime = '<style>' . '#time::-webkit-input-placeholder{color:#FF0000;} #time::-moz-placeholder{color:#FF0000;} #time:-ms-input-placeholder{color:#FF0000;}' . '</style>';
-//}
 
 include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
