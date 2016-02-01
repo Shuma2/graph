@@ -31,10 +31,46 @@
 <body>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/nav.html.php'; ?>
 <div class="container">
-    <p><button type="button" class="btn btn-primary">Toggle</button>
-        <button type="button" class="btn btn-success">Show</button>
-        <button type="button" class="btn btn-warning">Hide</button></p>
-    <p>do here "search"</p>
+    <div class="panel-group">
+        <form action="?" method="get">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <button type="button" class="btn btn-primary">Toggle</button>
+                    <button type="button" class="btn btn-success">Show all</button>
+                    <button type="button" class="btn btn-warning">Hide all</button>
+                </div>
+<!--                <input type="hidden" name="id" value="--><?php //echo $id; ?><!--">-->
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="searchWork">Work:</label>
+                                <input type="text" class="form-control" id="searchWork" name="searchWork" placeholder="Part or full title" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="dateSearch">Time:</label>
+                                <input type="date" class="form-control" id="dateSearch" name="dateSearch" placeholder="Choose date" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="commentSearch">Comment:</label>
+                                <input class="form-control" id="commentSearch" name="commentSearch" placeholder="Part or full comment>" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="action" style="visibility: hidden">Press</label>
+                                <input type="submit" name="action" class="btn btn-info" value="Search">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="panel-group" id="accordion">
         <?php foreach($datesUnique as $key => $nowDate): //перебор по дате (каждая дата выводится только 1 раз)
             $dateFormat = date_create($nowDate); ?>
@@ -90,6 +126,17 @@
             $(".collapse").collapse('hide');
         });
     });
+//    $(document).on('click','.btn-primary',function(e) {
+//        if($(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle')
+//        {
+//            $(this).collapse('hide');
+//        }
+//    });
+//    $(document).on('click', 'panel-collapse collapse.in', function(e) {
+//        if( $(e.target).is('panel-collapse') ) {
+//            $(this).removeClass('in').addClass('collapse');
+//        }
+//    });
     </script>
 </body>
 </html>

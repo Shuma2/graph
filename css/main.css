@@ -3,6 +3,10 @@
     border: 0px;
 }
 
+.btn-xs:focus{
+    outline: none;
+}
+
 #notificationNoNotes{
     text-align: center;
 }
@@ -61,3 +65,21 @@ body {
 #comment:focus::-moz-placeholder          {line-height: 300px; transition: line-height 0.5s ease;}
 #comment:focus:-moz-placeholder           {line-height: 300px; transition: line-height 0.5s ease;}
 #comment:focus:-ms-input-placeholder      {line-height: 300px; transition: line-height 0.5s ease;}
+
+#searchWork::-webkit-input-placeholder       {text-indent: 0px;   transition: text-indent 0.3s ease;}
+#searchWork::-moz-placeholder                {text-indent: 0px;   transition: text-indent 0.3s ease;}
+#searchWork:-moz-placeholder                 {text-indent: 0px;   transition: text-indent 0.3s ease;}
+#searchWork:-ms-input-placeholder            {text-indent: 0px;   transition: text-indent 0.3s ease;}
+#searchWork:focus::-webkit-input-placeholder {text-indent: 500px; transition: text-indent 0.3s ease;}
+#searchWork:focus::-moz-placeholder          {text-indent: 500px; transition: text-indent 0.3s ease;}
+#searchWork:focus:-moz-placeholder           {text-indent: 500px; transition: text-indent 0.3s ease;}
+#searchWork:focus:-ms-input-placeholder      {text-indent: 500px; transition: text-indent 0.3s ease;}
+
+#commentSearch::-webkit-input-placeholder       {text-indent: 0px;   transition: text-indent 0.3s ease;}
+#commentSearch::-moz-placeholder                {text-indent: 0px;   transition: text-indent 0.3s ease;}
+#commentSearch:-moz-placeholder                 {text-indent: 0px;   transition: text-indent 0.3s ease;}
+#commentSearch:-ms-input-placeholder            {text-indent: 0px;   transition: text-indent 0.3s ease;}
+#commentSearch:focus::-webkit-input-placeholder {text-indent: 500px; transition: text-indent 0.3s ease;}
+#commentSearch:focus::-moz-placeholder          {text-indent: 500px; transition: text-indent 0.3s ease;}
+#commentSearch:focus:-moz-placeholder           {text-indent: 500px; transition: text-indent 0.3s ease;}
+#commentSearch:focus:-ms-input-placeholder      {text-indent: 500px; transition: text-indent 0.3s ease;}
