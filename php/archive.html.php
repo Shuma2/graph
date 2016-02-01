@@ -9,15 +9,17 @@
 
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!--  My  -->
     <link href="/css/menu.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="shortcut icon" href="/favicon.png" type="image/png">
 
-    <!--  Colapse  -->
+    <!--  Collapse  -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -29,20 +31,9 @@
 <body>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/nav.html.php'; ?>
 <div class="container">
-    <script>$(document).ready(function(){ //раскрытие/закрытие всех панелей
-            $(".btn-primary").click(function(){
-                $(".collapse").collapse('toggle');
-            });
-            $(".btn-success").click(function(){
-                $(".collapse").collapse('show');
-            });
-            $(".btn-warning").click(function(){
-                $(".collapse").collapse('hide');
-            });
-        });</script>
     <p><button type="button" class="btn btn-primary">Toggle</button>
         <button type="button" class="btn btn-success">Show</button>
-        <button type="button" class="btn btn-warning">Hide</button> </p>
+        <button type="button" class="btn btn-warning">Hide</button></p>
     <p>do here "search"</p>
     <div class="panel-group" id="accordion">
         <?php foreach($datesUnique as $key => $nowDate): //перебор по дате (каждая дата выводится только 1 раз)
@@ -56,7 +47,6 @@
             <div id="collapse<?php echo $key + 1; ?>" class="panel-collapse collapse">
                 <div class="panel-body">
                     <table class="table table-striped">
-                        <?php if(isset($nowDate)): ?>
                         <thead>
                         <tr>
                             <th>#</th><th>Work</th><th>Time</th><th>Remaining time</th><th>Comment</th><th>Status</th>
@@ -74,10 +64,7 @@
                                 <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.archive.php'; ?></td>
                             </tr>
                                 <?php $numberOfRows++; endif; endforeach; ?>
-                        <?php elseif(!isset($nowDate)): ?>
-                        <h3 id="notificationNoNotes">Sorry, no notes for <?php htmlOut($nowDate); ?></h3>
                         </tbody>
-                        <?php endif; ?>
                     </table>
                 </div>
             </div>
@@ -91,5 +78,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/js/bootstrap.min.js"></script>
+    <script>
+    $(document).ready(function(){ //раскрытие/закрытие всех панелей
+        $(".btn-primary").click(function(){
+            $(".collapse").collapse('toggle');
+        });
+        $(".btn-success").click(function(){
+            $(".collapse").collapse('show');
+        });
+        $(".btn-warning").click(function(){
+            $(".collapse").collapse('hide');
+        });
+    });
+    </script>
 </body>
 </html>
