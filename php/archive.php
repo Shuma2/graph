@@ -14,8 +14,8 @@ if(isset($_GET['action']) && ($_GET['action']) == 'search')
 
     if($_GET['workSearch'] == '' && $_GET['commentSearch'] == '' && $_GET['dateSearch'] == '' && $_GET['dateSearch2'] == '')
     {
-        $error = 'Need to fill one or more field';
-        include $_SERVER['DOCUMENT_ROOT'] . '/inc/error.html.php';
+        $error = 'Need to fill one or more field for search';
+        header('Location: archive.php?error');
         exit();
     }
 

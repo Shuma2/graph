@@ -33,13 +33,12 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/nav.html.php'; ?>
 <div class="container">
     <div class="panel-group">
+        <form action="" method="get" autocomplete="off">
         <div class="panel panel-success">
             <div class="panel-heading">
-                <button type="button" class="btn btn-info">Toggle</button>
-                <button type="button" class="btn btn-success">Show all</button>
-                <button type="button" class="btn btn-warning">Hide all</button>
+                <input type="hidden" name="action" value="search">
+                <input type="submit" class="btn btn-primary" value="Search">
             </div>
-            <form action="" method="get" autocomplete="off">
                 <div class="panel-body">
                     <p class="text-muted">NOTE: You can fill one or more fields. Optional is one date, or range of dates.</p>
                     <div class="row">
@@ -65,16 +64,19 @@
                                 <input type="text" class="form-control" id="commentSearch" name="commentSearch" placeholder="Part or full comment" value="">
                             </div>
                         </div>
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label for="action" style="visibility: hidden">Press</label>
-                                <input type="hidden" name="action" value="search">
-                                <input type="submit" class="btn btn-primary" value="Search">
-                            </div>
-                        </div>
                     </div>
+                    <?php if(isset($_GET['error'])): ?>
+                        <p class="errorStyle">Need to fill one or more field for search</p>
+                    <?php endif; ?>
                 </div>
-            </form>
+            <?php if(isset($datesUnique)): ?>
+            <div class="panel-footer">
+                <button type="button" class="btn btn-info">Toggle</button>
+                <button type="button" class="btn btn-success">Show all</button>
+                <button type="button" class="btn btn-warning">Hide all</button>
+            </div>
+            <?php endif; ?>
+        </form>
         </div>
     </div>
     <?php if(isset($_GET['action']) && ($_GET['action']) == 'search'): ?>
