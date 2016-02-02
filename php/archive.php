@@ -12,24 +12,26 @@ if(isset($_GET['action']) && ($_GET['action']) == 'search')
 
     $placeholders = array();
 
-    if($_GET['workSearch'] == '' && $_GET['commentSearch'] == '' && $_GET['dateSearch'] == '')
+    if($_GET['workSearch'] == '' && $_GET['commentSearch'] == '' && $_GET['dateSearch'] == '' && $_GET['dateSearch2'] == '')
     {
         $error = 'Need to fill one or more field';
         include $_SERVER['DOCUMENT_ROOT'] . '/inc/error.html.php';
         exit();
     }
 
-    if(($_GET['dateSearch']) != '')
+    if(($_GET['dateSearch'] != '' && $_GET['dateSearch2'] == '') || ($_GET['dateSearch'] == '' && $_GET['dateSearch2'] != ''))
     {
         $date .= ' workdate = :workdate';
         $placeholders[':workdate'] = reformatDateToDB($_GET['dateSearch']);
+        $placeholders[':workdate'] = reformatDateToDB($_GET['dateSearch2']);
     }
 
     if($_GET['dateSearch'] != '' && $_GET['dateSearch2'] != '')
     {
         $date = '';
-        $date = ' workdate BETWEEN :workdate';
-        $placeholders[':workdate'] = reformatDateToDB($_GET['dateSearch']) . ' AND ' . reformatDateToDB($_GET['dateSearch2']);
+        $date = ' workdate BETWEEN :workdate AND :workdate2';
+        $placeholders[':workdate'] = reformatDateToDB($_GET['dateSearch']);
+        $placeholders[':workdate2'] = reformatDateToDB($_GET['dateSearch2']);
     }
 
     if($_GET['workSearch'] != '')
@@ -38,7 +40,53 @@ if(isset($_GET['action']) && ($_GET['action']) == 'search')
         $placeholders[':main'] = '%' . $_GET['workSearch'] . '%';
     }
 
-    if($_GET['workSearch'] != '' && $_GET['commentSearch'] != '' && ($_GET['dateSearch']) != '')
+    if($_GET['workSearch'] == '' && $_GET['commentSearch'] != '')
+    {
+        $comment .= ' comment LIKE :comment ';
+        $placeholders[':comment'] = '%' . $_GET['commentSearch'] . '%';
+    }
+
+    if($_GET['workSearch'] != '' && $_GET['dateSearch'] != '')
+    {
+        $work = '';
+        $work .= ' main LIKE :main ';
+        $date = '';
+        $date .= ' AND workdate = :workdate';
+        $placeholders[':main'] = '%' . $_GET['workSearch'] . '%';
+        $placeholders[':workdate'] = reformatDateToDB($_GET['dateSearch']);
+    }
+
+    if($_GET['workSearch'] != '' && $_GET['dateSearch2'] != '')
+    {
+        $work = '';
+        $work .= ' main LIKE :main ';
+        $date = '';
+        $date .= ' AND workdate = :workdate';
+        $placeholders[':main'] = '%' . $_GET['workSearch'] . '%';
+        $placeholders[':workdate'] = reformatDateToDB($_GET['dateSearch2']);
+    }
+
+    if($_GET['commentSearch'] != '' && $_GET['dateSearch'] != '')
+    {
+        $comment = '';
+        $comment .= ' comment LIKE :comment ';
+        $date = '';
+        $date .= ' AND workdate = :workdate';
+        $placeholders[':comment'] = '%' . $_GET['commentSearch'] . '%';
+        $placeholders[':workdate'] = reformatDateToDB($_GET['dateSearch']);
+    }
+
+    if($_GET['commentSearch'] != '' && $_GET['dateSearch2'] != '')
+    {
+        $comment = '';
+        $comment .= ' comment LIKE :comment ';
+        $date = '';
+        $date .= ' AND workdate = :workdate';
+        $placeholders[':comment'] = '%' . $_GET['commentSearch'] . '%';
+        $placeholders[':workdate'] = reformatDateToDB($_GET['dateSearch2']);
+    }
+
+    if($_GET['workSearch'] != '' && $_GET['commentSearch'] != '' && $_GET['dateSearch'] != '')
     {
         $work = '';
         $work .= ' main LIKE :main ';
@@ -51,10 +99,31 @@ if(isset($_GET['action']) && ($_GET['action']) == 'search')
         $placeholders[':workdate'] = reformatDateToDB($_GET['dateSearch']);
     }
 
-    if($_GET['workSearch'] == '' && $_GET['commentSearch'] != '')
+    if($_GET['workSearch'] != '' && $_GET['commentSearch'] != '' && $_GET['dateSearch2'] != '')
     {
-        $comment .= ' comment LIKE :comment ';
+        $work = '';
+        $work .= ' main LIKE :main ';
+        $comment = '';
+        $comment .= ' AND comment LIKE :comment ';
+        $date = '';
+        $date .= ' AND workdate = :workdate';
+        $placeholders[':main'] =  '%' . $_GET['workSearch'] . '%';
         $placeholders[':comment'] = '%' . $_GET['commentSearch'] . '%';
+        $placeholders[':workdate'] = reformatDateToDB($_GET['dateSearch2']);
+    }
+
+    if($_GET['workSearch'] != '' && $_GET['commentSearch'] != '' && ($_GET['dateSearch']) != '' && ($_GET['dateSearch2']) != '')
+    {
+        $work = '';
+        $work .= ' main LIKE :main ';
+        $comment = '';
+        $comment .= ' AND comment LIKE :comment ';
+        $date = '';
+        $date .= ' AND workdate BETWEEN :workdate AND :workdate2';
+        $placeholders[':main'] =  '%' . $_GET['workSearch'] . '%';
+        $placeholders[':comment'] = '%' . $_GET['commentSearch'] . '%';
+        $placeholders[':workdate'] = reformatDateToDB($_GET['dateSearch']);
+        $placeholders[':workdate2'] = reformatDateToDB($_GET['dateSearch2']);
     }
 
     try{
