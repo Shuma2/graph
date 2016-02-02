@@ -15,3 +15,9 @@ function errorText($erText, $e)
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/error.html.php';
     exit();
 }
+
+function reformatDateToDB($date)
+{
+    $dateFormat = date_create($date);
+    return $dateComplete = date_format($dateFormat, 'Y-m-d');
+}

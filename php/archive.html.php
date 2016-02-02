@@ -14,6 +14,7 @@
     <!--  My  -->
     <link href="/css/menu.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/datepicker.css" rel="stylesheet">
     <link rel="shortcut icon" href="/favicon.png" type="image/png">
 
     <!--  Collapse  -->
@@ -38,8 +39,9 @@
                 <button type="button" class="btn btn-success">Show all</button>
                 <button type="button" class="btn btn-warning">Hide all</button>
             </div>
-            <form action="" method="get">
+            <form action="" method="get" autocomplete="off">
                 <div class="panel-body">
+                    <p class="text-muted">NOTE: You can fill one or more fields. Optional is one date, or range of dates.</p>
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
@@ -47,14 +49,13 @@
                                 <input type="text" class="form-control" id="workSearch" name="workSearch" placeholder="Part or full title" value="">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="dateSearch">Date:</label>
-                                <div class="input-group date" data-provide="datepicker">
-                                    <input type="text" class="form-control" name="dateSearch" placeholder="Choose date">
-                                    <div class="input-group-addon">
-                                        <span class="glyphicon glyphicon-th"></span>
-                                    </div>
+                                <div class="hero-unit input-group input-daterange">
+                                    <input type="text" class="form-control" name="dateSearch" id="dateSearch" placeholder="Choose date" data-date-end-date="0d">
+                                    <span class="input-group-addon">to</span>
+                                    <input type="text" class="form-control" name="dateSearch2" id="dateSearch2" placeholder="Choose date" data-date-end-date="0d">
                                 </div>
                             </div>
                         </div>
@@ -151,7 +152,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/js/bootstrap.min.js"></script>
-    <script>
+<script src="/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+    // When the document is ready
+    // datepicker
+    $(document).ready(function () {
+
+        $('#dateSearch').datepicker({
+            format: "dd.mm.yyyy"
+        });
+        $('#dateSearch2').datepicker({
+            format: "dd.mm.yyyy"
+        });
+
+    });
+</script>
+<script>
     $(document).ready(function(){ //раскрытие/закрытие всех панелей
         $(".btn-info").click(function(){
             $(".collapse").collapse('toggle');
@@ -161,12 +177,6 @@
         });
         $(".btn-warning").click(function(){
             $(".collapse").collapse('hide');
-        });
-    });
-
-    $(function(){
-        $('.datepicker').datepicker({
-            format: 'mm-dd-yyyy'
         });
     });
     </script>

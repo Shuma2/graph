@@ -8,26 +8,29 @@ if(isset($_GET['action']) && ($_GET['action']) == 'search')
     $select = 'SELECT main, worktime, workdate, status, comment FROM work WHERE ';
     $work = '';
     $comment = '';
-//    $date = ' AND workdate = :workdate';
+    $date = '';
 
     $placeholders = array();
 
-//    if(($_GET['workSearch']) == '' && ($_GET['dateSearch']) == '' && ($_GET['commentSearch']) == '') {
-//        header('Location: archive.php?error');
-//        exit();
-//    }
-
-    if($_GET['workSearch'] == '' && $_GET['commentSearch'] == '')
+    if($_GET['workSearch'] == '' && $_GET['commentSearch'] == '' && $_GET['dateSearch'] == '')
     {
         $error = 'Need to fill one or more field';
         include $_SERVER['DOCUMENT_ROOT'] . '/inc/error.html.php';
         exit();
     }
 
-//    if(isset($_GET['dateSearch']))
-//    {
-//        $placeholders[':workdate'] = $_GET['dateSearch'];
-//    }
+    if(($_GET['dateSearch']) != '')
+    {
+        $date .= ' workdate = :workdate';
+        $placeholders[':workdate'] = reformatDateToDB($_GET['dateSearch']);
+    }
+
+    if($_GET['dateSearch'] != '' && $_GET['dateSearch2'] != '')
+    {
+        $date = '';
+        $date = ' workdate BETWEEN :workdate';
+        $placeholders[':workdate'] = reformatDateToDB($_GET['dateSearch']) . ' AND ' . reformatDateToDB($_GET['dateSearch2']);
+    }
 
     if($_GET['workSearch'] != '')
     {
@@ -35,11 +38,17 @@ if(isset($_GET['action']) && ($_GET['action']) == 'search')
         $placeholders[':main'] = '%' . $_GET['workSearch'] . '%';
     }
 
-    if($_GET['workSearch'] != '' && $_GET['commentSearch'] != '')
+    if($_GET['workSearch'] != '' && $_GET['commentSearch'] != '' && ($_GET['dateSearch']) != '')
     {
+        $work = '';
         $work .= ' main LIKE :main ';
+        $comment = '';
         $comment .= ' AND comment LIKE :comment ';
+        $date = '';
+        $date .= ' AND workdate = :workdate';
+        $placeholders[':main'] =  '%' . $_GET['workSearch'] . '%';
         $placeholders[':comment'] = '%' . $_GET['commentSearch'] . '%';
+        $placeholders[':workdate'] = reformatDateToDB($_GET['dateSearch']);
     }
 
     if($_GET['workSearch'] == '' && $_GET['commentSearch'] != '')
@@ -49,7 +58,7 @@ if(isset($_GET['action']) && ($_GET['action']) == 'search')
     }
 
     try{
-        $sql = $select . $work . $comment . ' ORDER BY workdate DESC';
+        $sql = $select . $work . $comment . $date . ' ORDER BY workdate DESC';
         $s = $pdo->prepare($sql);
         $s->execute($placeholders);
     }
