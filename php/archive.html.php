@@ -34,7 +34,7 @@
     <div class="panel-group">
         <div class="panel panel-success">
             <div class="panel-heading">
-                <button type="button" class="btn btn-primary">Toggle</button>
+                <button type="button" class="btn btn-info">Toggle</button>
                 <button type="button" class="btn btn-success">Show all</button>
                 <button type="button" class="btn btn-warning">Hide all</button>
             </div>
@@ -48,22 +48,27 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-<!--                            <div class="form-group">-->
-<!--                                <label for="dateSearch">Time:</label>-->
-<!--                                <input type="date" class="form-control" id="dateSearch" name="dateSearch" placeholder="Choose date" value="">-->
-<!--                            </div>-->
+                            <div class="form-group">
+                                <label for="dateSearch">Date:</label>
+                                <div class="input-group date" data-provide="datepicker">
+                                    <input type="text" class="form-control" name="dateSearch" placeholder="Choose date">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="commentSearch">Comment:</label>
-                                <input class="form-control" id="commentSearch" name="commentSearch" placeholder="Part or full comment" value="">
+                                <input type="text" class="form-control" id="commentSearch" name="commentSearch" placeholder="Part or full comment" value="">
                             </div>
                         </div>
                         <div class="col-md-1">
                             <div class="form-group">
                                 <label for="action" style="visibility: hidden">Press</label>
                                 <input type="hidden" name="action" value="search">
-                                <input type="submit" class="btn btn-info" value="Search">
+                                <input type="submit" class="btn btn-primary" value="Search">
                             </div>
                         </div>
                     </div>
@@ -75,7 +80,6 @@
         <div class="panel panel-info">
             <div class="panel-heading">Search result</div>
             <div class="panel-body">
-                <?php var_dump($searchResult); ?>
                 <?php if(isset($searchResult)): ?>
                 <table class="table table-striped">
                     <thead>
@@ -84,14 +88,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php foreach($searchResult as $key => $tableSearch): ?>
+                    <?php foreach($searchResult as $key => $table):
+                        $dateFormat = date_create($table['workdate']); ?>
                         <tr>
                             <td><?php htmlOut($key + 1); //выводит отсчёт с 1 каждый день ?></td>
-                            <td><?php htmlOut($tableSearch['main']); ?></td>
-                            <td><?php htmlOut($tableSearch['worktime']); ?></td>
-                            <td><?php htmlOut($tableSearch['workdate']); ?></td>
-                            <td><?php htmlOut($tableSearch['comment']); ?></td>
-                            <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.archive.php'; ?></td>
+                            <td><?php htmlOut($table['main']); ?></td>
+                            <td><?php htmlOut($table['worktime']); ?></td>
+                            <td><?php htmlOut(date_format($dateFormat, 'd.m.Y')); ?></td>
+                            <td><?php htmlOut($table['comment']); ?></td>
+                            <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.php'; ?></td>
                         </tr>
                     <?php endforeach; ?>
                     <?php elseif(!isset($searchResult)): ?>
@@ -120,15 +125,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <?php $numberOfRows = 1; foreach($allDates as $key2 => $data): ?>
-                                <?php if($data['workdate'] == $nowDate): ?>
+                            <?php $numberOfRows = 1; foreach($allDates as $key2 => $table): ?>
+                                <?php if($table['workdate'] == $nowDate): ?>
                             <tr>
                                 <td><?php htmlOut($numberOfRows); //выводит отсчёт с 1 каждый день ?></td>
-                                <td><?php htmlOut($data['main']); ?></td>
-                                <td><?php htmlOut($data['worktime']); ?></td>
+                                <td><?php htmlOut($table['main']); ?></td>
+                                <td><?php htmlOut($table['worktime']); ?></td>
                                 <td>{{remainingTime}}</td>
-                                <td><?php echo(substr($data['comment'], 0, 175)); ?></td>
-                                <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.archive.php'; ?></td>
+                                <td><?php echo(substr($$table['comment'], 0, 175)); ?></td>
+                                <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.php'; ?></td>
                             </tr>
                                 <?php $numberOfRows++; endif; endforeach; ?>
                         </tbody>
@@ -148,7 +153,7 @@
 <script src="/js/bootstrap.min.js"></script>
     <script>
     $(document).ready(function(){ //раскрытие/закрытие всех панелей
-        $(".btn-primary").click(function(){
+        $(".btn-info").click(function(){
             $(".collapse").collapse('toggle');
         });
         $(".btn-success").click(function(){
@@ -158,17 +163,12 @@
             $(".collapse").collapse('hide');
         });
     });
-//    $(document).on('click','.btn-primary',function(e) {
-//        if($(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle')
-//        {
-//            $(this).collapse('hide');
-//        }
-//    });
-//    $(document).on('click', 'panel-collapse collapse.in', function(e) {
-//        if( $(e.target).is('panel-collapse') ) {
-//            $(this).removeClass('in').addClass('collapse');
-//        }
-//    });
+
+    $(function(){
+        $('.datepicker').datepicker({
+            format: 'mm-dd-yyyy'
+        });
+    });
     </script>
 </body>
 </html>

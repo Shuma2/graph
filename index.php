@@ -163,8 +163,8 @@ $placeholderTime = 'Time for work';
 if(isset($_GET['error'])){
     $placeholderWork = 'Need to fill that field';
     $placeholderTime = 'Need to fill that field';
-    $emptyWork = '<style>' . '#workToDo::-webkit-input-placeholder{color:#FF0000;} #workToDo::-moz-placeholder{color:#FF0000;} #workToDo:-ms-input-placeholder{color:#FF0000;}' . '</style>';
-    $emptyTime = '<style>' . '#time::-webkit-input-placeholder{color:#FF0000;} #time::-moz-placeholder{color:#FF0000;} #time:-ms-input-placeholder{color:#FF0000;}' . '</style>';
+    $emptyWork = '<style>' . '#workToDo::-webkit-input-placeholder{color:#ff551b;} #workToDo::-moz-placeholder{color:#ff551b;} #workToDo:-ms-input-placeholder{color:#ff551b;}' . '</style>';
+    $emptyTime = '<style>' . '#time::-webkit-input-placeholder{color:#ff551b;} #time::-moz-placeholder{color:#ff551b;} #time:-ms-input-placeholder{color:#ff551b;}' . '</style>';
 }
 
 //SELECT в главную таблицу

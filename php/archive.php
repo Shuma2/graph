@@ -6,9 +6,9 @@ if(isset($_GET['action']) && ($_GET['action']) == 'search')
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
     $select = 'SELECT main, worktime, workdate, status, comment FROM work WHERE ';
-    $work = ' main LIKE "%:main%"';
-    $comment = ' AND comment LIKE "%:comment%"';
-    //$date = ' workdate = :workdate';
+    $work = '';
+    $comment = '';
+//    $date = ' AND workdate = :workdate';
 
     $placeholders = array();
 
@@ -17,23 +17,39 @@ if(isset($_GET['action']) && ($_GET['action']) == 'search')
 //        exit();
 //    }
 
+    if($_GET['workSearch'] == '' && $_GET['commentSearch'] == '')
+    {
+        $error = 'Need to fill one or more field';
+        include $_SERVER['DOCUMENT_ROOT'] . '/inc/error.html.php';
+        exit();
+    }
+
+//    if(isset($_GET['dateSearch']))
+//    {
+//        $placeholders[':workdate'] = $_GET['dateSearch'];
+//    }
+
     if($_GET['workSearch'] != '')
     {
-        $placeholders[':main'] = $_GET['workSearch'];
+        $work .= ' main LIKE :main ';
+        $placeholders[':main'] = '%' . $_GET['workSearch'] . '%';
     }
 
-    if($_GET['dateSearch'] != '')
+    if($_GET['workSearch'] != '' && $_GET['commentSearch'] != '')
     {
-        $placeholders[':workdate'] = $_GET['dateSearch'];
+        $work .= ' main LIKE :main ';
+        $comment .= ' AND comment LIKE :comment ';
+        $placeholders[':comment'] = '%' . $_GET['commentSearch'] . '%';
     }
 
-    if($_GET['commentSearch'] != '')
+    if($_GET['workSearch'] == '' && $_GET['commentSearch'] != '')
     {
-        $placeholders[':comment'] = $_GET['commentSearch'];
+        $comment .= ' comment LIKE :comment ';
+        $placeholders[':comment'] = '%' . $_GET['commentSearch'] . '%';
     }
 
     try{
-        $sql = $select . $work . $comment . $date;
+        $sql = $select . $work . $comment . ' ORDER BY workdate DESC';
         $s = $pdo->prepare($sql);
         $s->execute($placeholders);
     }
@@ -59,7 +75,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
 try
 {
-    $result = $pdo->query('SELECT id, main, workdate, worktime, status, comment FROM work ORDER BY workdate DESC');
+    $result = $pdo->query('SELECT id, main, workdate, worktime, status, comment FROM work WHERE workdate <>(SELECT max(workdate) FROM work) ORDER BY workdate DESC');
 }
 catch(PDOException $e)
 {
