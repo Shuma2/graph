@@ -28,7 +28,7 @@
     <![endif]-->
 </head>
 <body>
-
+<script src="/js/easytimer.min.js"></script>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/nav.html.php'; ?>
 
 <div class="main">
@@ -93,15 +93,7 @@
                                         <td><?php htmlOut($key + 1); //выводит отсчёт с 1 каждый день ?></td>
                                         <td><?php htmlOut($table['work']); ?></td>
                                         <td><?php htmlOut($table['workTime']); ?></td>
-                                        <td>Timer
-                                            <script>
-                                                var intervalID = window.setInterval(1000, 100);
-
-                                            function myCallback() {
-                                            // Your code here
-                                            }
-                                            </script>
-                                        </td>
+                                        <td id="countdownTimer<?php htmlOut($key + 1); ?>"><script>var timeValue = <?php htmlOut($table['workTime']); ?>;</script></td>
                                         <td><?php htmlOut($table['comment']); ?></td>
                                         <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.php'; ?></td>
                                         <td>
@@ -142,5 +134,33 @@
 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js'></script> <!--for timer-->
 <script src="/js/player.js"></script> <!--for timer-->
+<script>
+//    document.write(timeValue);
+    var timer = new Timer();
+//    timer.start({countdown: true, startValues: {seconds: timeValue * 60}});
+//    $('#countdownTimer1').html(timer.getTimeValues().toString());
+//    timer.addEventListener('secondsUpdated', function (e) {
+//        $('#countdownTimer1').html(timer.getTimeValues().toString());
+//    });
+//    timer.addEventListener('targetAchieved', function (e) {
+//        $('#countdownTimer1').html('KABOOM!!');
+//    });
+
+    $('.table-striped #button_play1').click(function () {
+        timer.start({countdown: true, startValues: {seconds: timeValue * 60}});
+    });
+    $('.table-striped #button_stop1').click(function () {
+        timer.pause();
+    });
+//    $('.table-striped #button_stop1').click(function () {
+//        timer.stop();
+//    });
+    timer.addEventListener('secondsUpdated', function () {
+        $('.table-striped #countdownTimer1').html(timer.getTimeValues().toString());
+    });
+    timer.addEventListener('started', function () {
+        $('.table-striped #countdownTimer1').html(timer.getTimeValues().toString());
+    });
+</script>
 </body>
 </html>
