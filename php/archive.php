@@ -14,7 +14,12 @@ if(isset($_GET['action']) && ($_GET['action']) == 'search')
 
     if($_GET['workSearch'] == '' && $_GET['commentSearch'] == '' && $_GET['dateSearch'] == '' && $_GET['dateSearch2'] == '')
     {
-        $error = 'Need to fill one or more field for search';
+//        session_start();
+//        $_SESSION['workSearch'] = $_GET['workSearch'];
+//        $_SESSION['commentSearch'] = $_GET['commentSearch'];
+//        $_SESSION['dateSearch'] = $_GET['dateSearch'];
+//        $_SESSION['dateSearch2'] = $_GET['dateSearch2'];
+
         header('Location: archive.php?error');
         exit();
     }

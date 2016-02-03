@@ -40,7 +40,9 @@
                 <input type="submit" class="btn btn-primary" value="Search">
             </div>
                 <div class="panel-body">
-                    <p class="text-muted">NOTE: You can fill one or more fields. Optional is one date, or range of dates.</p>
+                    <?php if(!isset($_GET['error'])) {
+                        echo "<p class=\"text-muted\">NOTE: For search please fill one or more fields. One date, or range of dates are optional.</p>";}
+                        else{ echo "<p class=\"text-danger bg-danger\">NOTE: For search please fill one or more fields. One date, or range of dates are optional.</p>";} ?>
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
@@ -65,9 +67,6 @@
                             </div>
                         </div>
                     </div>
-                    <?php if(isset($_GET['error'])): ?>
-                        <p class="errorStyle">Need to fill one or more field for search</p>
-                    <?php endif; ?>
                 </div>
             <?php if(isset($datesUnique)): ?>
             <div class="panel-footer">

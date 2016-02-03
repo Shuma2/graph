@@ -93,7 +93,15 @@
                                         <td><?php htmlOut($key + 1); //выводит отсчёт с 1 каждый день ?></td>
                                         <td><?php htmlOut($table['work']); ?></td>
                                         <td><?php htmlOut($table['workTime']); ?></td>
-                                        <td>{{remainingTime}}</td>
+                                        <td>
+                                            <script>
+                                                var intervalID = window.setInterval(1000, 100);
+
+                                            function myCallback() {
+                                            // Your code here
+                                            }
+                                            </script>
+                                        </td>
                                         <td><?php htmlOut($table['comment']); ?></td>
                                         <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.php'; ?></td>
                                         <td>
@@ -123,7 +131,6 @@
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

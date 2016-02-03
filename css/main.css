@@ -45,20 +45,20 @@ body {
 #workToDo::-moz-placeholder                {text-indent: 0px;   transition: text-indent 0.3s ease;}
 #workToDo:-moz-placeholder                 {text-indent: 0px;   transition: text-indent 0.3s ease;}
 #workToDo:-ms-input-placeholder            {text-indent: 0px;   transition: text-indent 0.3s ease;}
-#workToDo:focus::-webkit-input-placeholder {text-indent: 500px; transition: text-indent 0.3s ease;}
-#workToDo:focus::-moz-placeholder          {text-indent: 500px; transition: text-indent 0.3s ease;}
-#workToDo:focus:-moz-placeholder           {text-indent: 500px; transition: text-indent 0.3s ease;}
-#workToDo:focus:-ms-input-placeholder      {text-indent: 500px; transition: text-indent 0.3s ease;}
+#workToDo:focus::-webkit-input-placeholder {text-indent: 700px; transition: text-indent 0.3s ease;}
+#workToDo:focus::-moz-placeholder          {text-indent: 700px; transition: text-indent 0.3s ease;}
+#workToDo:focus:-moz-placeholder           {text-indent: 700px; transition: text-indent 0.3s ease;}
+#workToDo:focus:-ms-input-placeholder      {text-indent: 700px; transition: text-indent 0.3s ease;}
 
 /*сдвиг placeholder вправо при фокусе*/
 #time::-webkit-input-placeholder       {text-indent: 0px;   transition: text-indent 0.3s ease;}
 #time::-moz-placeholder                {text-indent: 0px;   transition: text-indent 0.3s ease;}
 #time:-moz-placeholder                 {text-indent: 0px;   transition: text-indent 0.3s ease;}
 #time:-ms-input-placeholder            {text-indent: 0px;   transition: text-indent 0.3s ease;}
-#time:focus::-webkit-input-placeholder {text-indent: 500px; transition: text-indent 0.3s ease;}
-#time:focus::-moz-placeholder          {text-indent: 500px; transition: text-indent 0.3s ease;}
-#time:focus:-moz-placeholder           {text-indent: 500px; transition: text-indent 0.3s ease;}
-#time:focus:-ms-input-placeholder      {text-indent: 500px; transition: text-indent 0.3s ease;}
+#time:focus::-webkit-input-placeholder {text-indent: 700px; transition: text-indent 0.3s ease;}
+#time:focus::-moz-placeholder          {text-indent: 700px; transition: text-indent 0.3s ease;}
+#time:focus:-moz-placeholder           {text-indent: 700px; transition: text-indent 0.3s ease;}
+#time:focus:-ms-input-placeholder      {text-indent: 700px; transition: text-indent 0.3s ease;}
 
 /*сдвиг placeholder вниз при фокусе*/
 #comment::-webkit-input-placeholder       {line-height: 20px;  transition: line-height 0.5s ease;}
@@ -74,16 +74,34 @@ body {
 #workSearch::-moz-placeholder                {text-indent: 0px;   transition: text-indent 0.3s ease;}
 #workSearch:-moz-placeholder                 {text-indent: 0px;   transition: text-indent 0.3s ease;}
 #workSearch:-ms-input-placeholder            {text-indent: 0px;   transition: text-indent 0.3s ease;}
-#workSearch:focus::-webkit-input-placeholder {text-indent: 500px; transition: text-indent 0.3s ease;}
-#workSearch:focus::-moz-placeholder          {text-indent: 500px; transition: text-indent 0.3s ease;}
-#workSearch:focus:-moz-placeholder           {text-indent: 500px; transition: text-indent 0.3s ease;}
-#workSearch:focus:-ms-input-placeholder      {text-indent: 500px; transition: text-indent 0.3s ease;}
+#workSearch:focus::-webkit-input-placeholder {text-indent: 700px; transition: text-indent 0.3s ease;}
+#workSearch:focus::-moz-placeholder          {text-indent: 700px; transition: text-indent 0.3s ease;}
+#workSearch:focus:-moz-placeholder           {text-indent: 700px; transition: text-indent 0.3s ease;}
+#workSearch:focus:-ms-input-placeholder      {text-indent: 700px; transition: text-indent 0.3s ease;}
 
 #commentSearch::-webkit-input-placeholder       {text-indent: 0px;   transition: text-indent 0.3s ease;}
 #commentSearch::-moz-placeholder                {text-indent: 0px;   transition: text-indent 0.3s ease;}
 #commentSearch:-moz-placeholder                 {text-indent: 0px;   transition: text-indent 0.3s ease;}
 #commentSearch:-ms-input-placeholder            {text-indent: 0px;   transition: text-indent 0.3s ease;}
-#commentSearch:focus::-webkit-input-placeholder {text-indent: 500px; transition: text-indent 0.3s ease;}
-#commentSearch:focus::-moz-placeholder          {text-indent: 500px; transition: text-indent 0.3s ease;}
-#commentSearch:focus:-moz-placeholder           {text-indent: 500px; transition: text-indent 0.3s ease;}
-#commentSearch:focus:-ms-input-placeholder      {text-indent: 500px; transition: text-indent 0.3s ease;}
+#commentSearch:focus::-webkit-input-placeholder {text-indent: 700px; transition: text-indent 0.3s ease;}
+#commentSearch:focus::-moz-placeholder          {text-indent: 700px; transition: text-indent 0.3s ease;}
+#commentSearch:focus:-moz-placeholder           {text-indent: 700px; transition: text-indent 0.3s ease;}
+#commentSearch:focus:-ms-input-placeholder      {text-indent: 700px; transition: text-indent 0.3s ease;}
+
+#dateSearch::-webkit-input-placeholder       {text-indent: 0px;   transition: text-indent 0.3s ease;}
+#dateSearch::-moz-placeholder                {text-indent: 0px;   transition: text-indent 0.3s ease;}
+#dateSearch:-moz-placeholder                 {text-indent: 0px;   transition: text-indent 0.3s ease;}
+#dateSearch:-ms-input-placeholder            {text-indent: 0px;   transition: text-indent 0.3s ease;}
+#dateSearch:focus::-webkit-input-placeholder {text-indent: 700px; transition: text-indent 0.3s ease;}
+#dateSearch:focus::-moz-placeholder          {text-indent: 700px; transition: text-indent 0.3s ease;}
+#dateSearch:focus:-moz-placeholder           {text-indent: 700px; transition: text-indent 0.3s ease;}
+#dateSearch:focus:-ms-input-placeholder      {text-indent: 700px; transition: text-indent 0.3s ease;}
+
+#dateSearch2::-webkit-input-placeholder       {text-indent: 0px;   transition: text-indent 0.3s ease;}
+#dateSearch2::-moz-placeholder                {text-indent: 0px;   transition: text-indent 0.3s ease;}
+#dateSearch2:-moz-placeholder                 {text-indent: 0px;   transition: text-indent 0.3s ease;}
+#dateSearch2:-ms-input-placeholder            {text-indent: 0px;   transition: text-indent 0.3s ease;}
+#dateSearch2:focus::-webkit-input-placeholder {text-indent: 700px; transition: text-indent 0.3s ease;}
+#dateSearch2:focus::-moz-placeholder          {text-indent: 700px; transition: text-indent 0.3s ease;}
+#dateSearch2:focus:-moz-placeholder           {text-indent: 700px; transition: text-indent 0.3s ease;}
+#dateSearch2:focus:-ms-input-placeholder      {text-indent: 700px; transition: text-indent 0.3s ease;}

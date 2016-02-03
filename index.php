@@ -1,9 +1,8 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/inc/helpers.inc.php';
 
-//$button = 'Add work';
-//$action = 'addWork';
-
+$placeholderWork = 'What need to do';
+$placeholderTime = 'Time for work';
 
 function countNumberOfWork() { //подсчёт кол-ва записел в поле #
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
@@ -49,13 +48,17 @@ if(isset($_POST['action']) && $_POST['action'] == 'Add Work') { //нажатие
     $insert = 'INSERT INTO work SET ';
     $work = ' main = :main,';
     $time = ' worktime = :time,';
-    $comment = ' comment = :comment,';
+    $comment = '';
     $date = ' workdate = CURDATE(),';
     $status = ' status = 3;';
 
     $placeholders = array();
 
     if(($_POST['workToDo']) == '' || ($_POST['time']) == ''){
+        session_start();
+        $_SESSION['workToDo'] = $_POST['workToDo'];
+        $_SESSION['time'] = $_POST['time'];
+
         header('Location: index.php?error');
         exit();
     }
@@ -69,7 +72,12 @@ if(isset($_POST['action']) && $_POST['action'] == 'Add Work') { //нажатие
     }
 
     if ($_POST['comment'] != '') {
+        $comment = ' comment = :comment,';
         $placeholders[':comment'] = $_POST['comment'];
+    }
+
+    if($_POST['comment'] == '') {
+        $comment = '';
     }
 
     try{
@@ -157,14 +165,21 @@ if(isset($_POST['random']) == 'Add random'){
     exit();
 }
 
-$placeholderWork = 'What need to do';
-$placeholderTime = 'Time for work';
-
 if(isset($_GET['error'])){
-    $placeholderWork = 'Need to fill that field';
-    $placeholderTime = 'Need to fill that field';
+    session_start();
+    if($_SESSION['workToDo'] == '')
+        $placeholderWork = 'Need to fill that field';
+    else
+        $workToDo = $_SESSION['workToDo'];
+
+    if($_SESSION['time'] == '')
+        $placeholderTime = 'Need to fill that field';
+    else
+        $timeForWork = $_SESSION['time'];
+
     $emptyWork = '<style>' . '#workToDo::-webkit-input-placeholder{color:#ff551b;} #workToDo::-moz-placeholder{color:#ff551b;} #workToDo:-ms-input-placeholder{color:#ff551b;}' . '</style>';
     $emptyTime = '<style>' . '#time::-webkit-input-placeholder{color:#ff551b;} #time::-moz-placeholder{color:#ff551b;} #time:-ms-input-placeholder{color:#ff551b;}' . '</style>';
+    session_abort();
 }
 
 //SELECT в главную таблицу
