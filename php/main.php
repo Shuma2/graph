@@ -93,7 +93,7 @@
                                         <td><?php htmlOut($key + 1); //выводит отсчёт с 1 каждый день ?></td>
                                         <td><?php htmlOut($table['work']); ?></td>
                                         <td><?php htmlOut($table['workTime']); ?></td>
-                                        <td>
+                                        <td>Timer
                                             <script>
                                                 var intervalID = window.setInterval(1000, 100);
 
@@ -106,11 +106,10 @@
                                         <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.php'; ?></td>
                                         <td>
                                             <div class="player">
-                                                <button type="button" id="button_play" class="btn btn-xs" onclick='buttonPlayPress()'>
+                                                <button type="button" id="button_play<?php htmlOut($key + 1); ?>" class="btn-xs btn" onclick='buttonPlayPress(<?php htmlOut($key + 1); ?>)'>
                                                     <i class="fa fa-play"></i>
                                                 </button>
-
-                                                <button type="button" id="button_stop" class="btn btn-xs" onclick='buttonStopPress()'>
+                                                <button type="button" id="button_stop<?php htmlOut($key + 1); ?>" class="btn-xs btn" onclick='buttonStopPress(<?php htmlOut($key + 1); ?>)'>
                                                     <i class="fa fa-stop"></i>
                                                 </button>
                                             </div>
@@ -140,6 +139,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/js/bootstrap.min.js"></script>
-<script src="/js/player.js"></script>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js'></script> <!--for timer-->
+<script src="/js/player.js"></script> <!--for timer-->
 </body>
 </html>
