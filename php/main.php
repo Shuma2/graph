@@ -89,11 +89,11 @@
                         </thead>
                         <tbody>
                                 <?php foreach($resultTable as $key => $table): ?>
-                                    <tr>
+                                    <tr id="trId<?php htmlOut($key + 1); ?>">
                                         <td><?php htmlOut($key + 1); //выводит отсчёт с 1 каждый день ?></td>
                                         <td><?php htmlOut($table['work']); ?></td>
                                         <td><?php htmlOut($table['workTime']); ?></td>
-                                        <td id="countdownTimer<?php htmlOut($key + 1); ?>"><script>var timeValue = <?php htmlOut($table['workTime']); ?>;</script></td>
+                                        <td id="countdownTimer<?php htmlOut($key + 1); ?>"><script>var timeValue<?php htmlOut($key + 1); ?> = <?php htmlOut($table['workTime']); ?>;</script></td>
                                         <td><?php htmlOut($table['comment']); ?></td>
                                         <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.php'; ?></td>
                                         <td>
@@ -101,15 +101,15 @@
                                                 <button type="button" id="button_play<?php htmlOut($key + 1); ?>" class="btn-xs btn" onclick='buttonPlayPress(<?php htmlOut($key + 1); ?>)'>
                                                     <i class="fa fa-play"></i>
                                                 </button>
-                                                <button type="button" id="button_stop<?php htmlOut($key + 1); ?>" class="btn-xs btn" onclick='buttonStopPress(<?php htmlOut($key + 1); ?>)'>
-                                                    <i class="fa fa-stop"></i>
+                                                <button type="button" id="button_pause<?php htmlOut($key + 1); ?>" class="btn-xs btn" onclick='buttonPausePress(<?php htmlOut($key + 1); ?>)'>
+                                                    <i class="fa fa-pause"></i>
                                                 </button>
                                             </div>
                                         </td>
                                         <form action="?" method="post">
                                             <div>
                                                 <td id="hiddenIdRow"><input type="hidden" name="id" value="<?php echo $table['id']; ?>"></td>
-                                                <td><input type="submit" name="control" class="btn btn-info btn-xs" value="Edit"></td>
+                                                <td><input type="submit" id="editButton<?php htmlOut($key + 1); ?>" name="control" class="btn btn-info btn-xs" value="Edit"></td>
                                                 <td><input type="submit" name="control" class="btn btn-danger btn-xs" value="Delete"></td>
                                             </div>
                                         </form>
@@ -135,31 +135,32 @@
 <script src='http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js'></script> <!--for timer-->
 <script src="/js/player.js"></script> <!--for timer-->
 <script>
-//    document.write(timeValue);
     var timer = new Timer();
-//    timer.start({countdown: true, startValues: {seconds: timeValue * 60}});
-//    $('#countdownTimer1').html(timer.getTimeValues().toString());
-//    timer.addEventListener('secondsUpdated', function (e) {
-//        $('#countdownTimer1').html(timer.getTimeValues().toString());
-//    });
-//    timer.addEventListener('targetAchieved', function (e) {
-//        $('#countdownTimer1').html('KABOOM!!');
-//    });
 
     $('.table-striped #button_play1').click(function () {
-        timer.start({countdown: true, startValues: {seconds: timeValue * 60}});
+        timer.start({countdown: true, startValues: {seconds: timeValue1}});
+        $('#trId1').removeClass('warning');
+        $('#trId1').addClass('info');
     });
-    $('.table-striped #button_stop1').click(function () {
+    $('.table-striped #button_pause1').click(function () {
         timer.pause();
+        $('#trId1').removeClass('info');
+        $('#trId1').addClass('warning');
     });
-//    $('.table-striped #button_stop1').click(function () {
-//        timer.stop();
-//    });
     timer.addEventListener('secondsUpdated', function () {
         $('.table-striped #countdownTimer1').html(timer.getTimeValues().toString());
     });
     timer.addEventListener('started', function () {
         $('.table-striped #countdownTimer1').html(timer.getTimeValues().toString());
+    });
+    timer.addEventListener('targetAchieved', function (e) {
+        $('#countdownTimer1').html('Finished');
+        document.getElementById("button_play1").disabled = true;
+        document.getElementById("button_pause1").disabled = true;
+        document.getElementById("editButton1").disabled = true;
+        $('#button_play1').removeClass('btn-success');
+        $('#trId1').removeClass('info');
+        $('#trId1').addClass('success');
     });
 </script>
 </body>
