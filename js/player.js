@@ -1,6 +1,6 @@
 var state = 'stop';
 
-function buttonPlayPress(num) {
+function buttonPlayPress(num, timeValue) {
     if(state=='stop'){
         state='play';
         var button = d3.select("#button_play"+num).classed('btn-success', true);
