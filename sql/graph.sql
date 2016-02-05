@@ -2,9 +2,9 @@
 -- version 4.0.10.10
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Jan 27, 2016 at 08:52 PM
--- Server version: 5.6.26
+-- Host: 127.0.0.1:3330
+-- Generation Time: Feb 05, 2016 at 09:00 AM
+-- Server version: 5.5.45
 -- PHP Version: 5.6.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `graph`
 --
+CREATE DATABASE IF NOT EXISTS `graph` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `graph`;
 
 -- --------------------------------------------------------
 
@@ -36,13 +38,8 @@ CREATE TABLE IF NOT EXISTS `work` (
   `comment` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `date` (`workdate`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=110 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=219 ;
 
---
--- Truncate table before insert `work`
---
-
-TRUNCATE TABLE `work`;
 --
 -- Dumping data for table `work`
 --
@@ -83,25 +80,51 @@ INSERT INTO `work` (`id`, `main`, `worktime`, `workdate`, `status`, `comment`) V
 (75, 'Graph6', 189, '2016-01-22', 3, 'OHOH'),
 (76, 'Graph6', 32, '2016-01-22', 3, 'OHOH'),
 (77, 'Graph6', 186, '2016-01-22', 3, 'OHOH'),
-(78, 'Test', 900, '2016-01-22', 3, 'aloha'),
 (79, 'TEST', 314, '2016-01-22', 3, 'test'),
 (80, 'TEST', 1, '2016-01-22', 3, '!'),
 (81, 'TEST', 2, '2016-01-22', 3, '2'),
 (82, '31', 312, '2016-01-22', 3, '123'),
 (83, 'TEST3213', 24213, '2016-01-22', 3, '212312'),
-(85, 'Graph2', 227, '2016-01-23', 3, 'TEST'),
-(87, 'Graph4', 32, '2016-01-23', 3, 'TEST'),
-(89, 'Graph5', 296, '2016-01-23', 3, 'TEST'),
-(90, 'Graph7', 130, '2016-01-23', 3, 'TEST'),
-(91, 'Graph|20', 90, '2016-01-26', 3, 'TEST'),
-(92, 'Graph|99', 90, '2016-01-26', 3, 'TEST'),
-(93, 'Graph|1022', 90, '2016-01-26', 3, 'TEST'),
-(94, 'Graph|14', 90, '2016-01-26', 3, 'TEST'),
-(95, 'Graph|84', 90, '2016-01-27', 3, 'TEST'),
-(96, 'Graph|78', 90, '2016-01-27', 3, 'TEST'),
-(105, 'Graph|196', 90, '2016-01-27', 3, 'TEST'),
-(106, 'Graph|90', 90, '2016-01-27', 3, 'TEST'),
-(109, 'Graph|95', 90, '2016-01-27', 3, 'TEST');
+(99, 'Graph|82', 90, '2016-01-25', 3, 'TEST'),
+(100, 'Graph|51', 90, '2016-01-25', 3, 'TEST'),
+(101, 'Graph|94', 90, '2016-01-25', 3, 'TEST'),
+(133, 'Graph|944', 90, '2016-01-25', 3, 'TEST'),
+(135, 'Graph|73', 90, '2016-01-26', 3, 'TEST'),
+(136, 'Graph|933', 90, '2016-01-26', 3, 'TEST'),
+(163, 'Graph|82', 90, '2016-01-26', 3, 'TEST'),
+(164, 'Graph|90', 90, '2016-01-26', 3, 'TEST'),
+(165, 'Graph|95', 90, '2016-01-26', 3, 'TEST'),
+(166, 'Graph|110', 90, '2016-01-27', 3, 'TEST'),
+(167, 'Graph|555', 90, '2016-01-27', 3, 'TEST'),
+(168, 'Graph|21', 90, '2016-01-27', 3, 'TEST'),
+(169, 'Graph|78', 90, '2016-01-28', 3, 'TEST'),
+(170, 'Graph|966', 90, '2016-01-28', 3, 'TEST'),
+(171, 'Graph|80', 90, '2016-01-28', 3, 'TEST'),
+(175, 'Graph|187', 90, '2016-01-28', 3, 'TEST'),
+(176, 'Graph|95', 90, '2016-01-28', 3, 'TEST'),
+(184, 'Graph|118', 90, '2016-01-28', 3, 'TEST'),
+(185, 'Graph|64', 90, '2016-01-29', 3, 'TEST'),
+(186, 'Graph|210', 90, '2016-01-29', 3, 'TEST'),
+(187, 'Graph|110', 90, '2016-01-29', 3, 'TEST'),
+(188, 'Graph|98', 90, '2016-01-29', 3, 'TEST'),
+(189, 'Graph|102', 90, '2016-01-29', 3, 'TEST'),
+(190, 'Graph|66', 90, '2016-02-01', 3, 'TEST'),
+(192, 'Graph|185', 90, '2016-02-01', 3, 'TEST'),
+(193, 'Graph|150', 90, '2016-02-01', 3, 'TEST'),
+(204, 'Ianc|100', 90, '2016-02-02', 2, 'Learn PHP'),
+(205, 'IancG|82', 90, '2016-02-02', 2, 'Learn PHP'),
+(206, 'Graph|180', 90, '2016-02-03', 3, 'TEST'),
+(207, 'Graph|130', 90, '2016-02-03', 3, 'TEST'),
+(208, 'Ianc', 20, '2016-02-03', 3, 'Learn PHP'),
+(209, 'Add session to graph', 120, '2016-02-03', 3, 'and repair "insert" here'),
+(211, 'Graph|79', 5, '2016-02-04', 3, 'TEST'),
+(212, 'Graph|160', 5, '2016-02-04', 3, 'TEST'),
+(213, 'Graph|168', 5, '2016-02-04', 3, 'TEST'),
+(214, 'Graph|11', 2, '2016-02-04', 3, 'TEST'),
+(215, 'Graph|164', 5, '2016-02-05', 3, 'TEST'),
+(216, 'Graph|198', 90, '2016-02-05', 3, 'TEST'),
+(217, 'Graph|200', 90, '2016-02-05', 3, 'TEST'),
+(218, 'Graph|186', 90, '2016-02-05', 3, 'TEST');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

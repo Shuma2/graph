@@ -30,7 +30,6 @@
 <body>
 <script src="/js/easytimer.min.js"></script>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/nav.html.php'; ?>
-<script>var num = [];</script>
 <div class="main">
     <div class="container">
         <div class="panel-group">
@@ -94,7 +93,7 @@
                                         <td><?php htmlOut($table['work']); ?></td>
                                         <td><?php htmlOut($table['workTime']); ?></td>
                                         <td id="countdownTimer<?php htmlOut($key + 1); ?>">
-                                            <script>num.push(<?php htmlOut($key + 1); ?>);
+                                            <script>var num = <?php htmlOut($key + 1); ?>;
                                                 var timeValue<?php htmlOut($key + 1); ?> = <?php htmlOut($table['workTime']); ?>;
                                             </script></td>
                                         <td><?php htmlOut($table['comment']); ?></td>
@@ -137,64 +136,64 @@
 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js'></script> <!--for timer-->
 <script src="/js/player.js"></script> <!--for timer-->
-<script>
-    document.write(num);
-        var timer = new Timer();
-
-        $('.table-striped #button_play'+num).click(function () {
-            timer.start({countdown: true, startValues: {seconds: timeValue1}});
-            $('#trId'+num).removeClass('warning');
-            $('#trId'+num).addClass('info');
-        });
-        $('.table-striped #button_pause'+num).click(function () {
-            timer.pause();
-            $('#trId'+num).removeClass('info');
-            $('#trId'+num).addClass('warning');
-        });
-        timer.addEventListener('secondsUpdated', function () {
-            $('.table-striped #countdownTimer'+num).html(timer.getTimeValues().toString());
-        });
-        timer.addEventListener('started', function () {
-            $('.table-striped #countdownTimer'+num).html(timer.getTimeValues().toString());
-        });
-        timer.addEventListener('targetAchieved', function (e) {
-            $('#countdownTimer'+num).html('Finished');
-            document.getElementById("button_play"+num).disabled = true;
-            document.getElementById("button_pause"+num).disabled = true;
-            document.getElementById("editButton"+num).disabled = true;
-            $('#button_play'+num).removeClass('btn-success');
-            $('#trId'+num).removeClass('info');
-            $('#trId'+num).addClass('success');
-        });
-</script>
 <!--<script>-->
-<!--    var timer = new Timer();-->
+<!--    document.write(num);-->
+<!--        var timer = new Timer();-->
 <!---->
-<!--    $('.table-striped #button_play1').click(function () {-->
-<!--        timer.start({countdown: true, startValues: {seconds: timeValue1}});-->
-<!--        $('#trId1').removeClass('warning');-->
-<!--        $('#trId1').addClass('info');-->
-<!--    });-->
-<!--    $('.table-striped #button_pause1').click(function () {-->
-<!--        timer.pause();-->
-<!--        $('#trId1').removeClass('info');-->
-<!--        $('#trId1').addClass('warning');-->
-<!--    });-->
-<!--    timer.addEventListener('secondsUpdated', function () {-->
-<!--        $('.table-striped #countdownTimer1').html(timer.getTimeValues().toString());-->
-<!--    });-->
-<!--    timer.addEventListener('started', function () {-->
-<!--        $('.table-striped #countdownTimer1').html(timer.getTimeValues().toString());-->
-<!--    });-->
-<!--    timer.addEventListener('targetAchieved', function (e) {-->
-<!--        $('#countdownTimer1').html('Finished');-->
-<!--        document.getElementById("button_play1").disabled = true;-->
-<!--        document.getElementById("button_pause1").disabled = true;-->
-<!--        document.getElementById("editButton1").disabled = true;-->
-<!--        $('#button_play1').removeClass('btn-success');-->
-<!--        $('#trId1').removeClass('info');-->
-<!--        $('#trId1').addClass('success');-->
-<!--    });-->
+<!--        $('.table-striped #button_play'+num).click(function () {-->
+<!--            timer.start({countdown: true, startValues: {seconds: timeValue1}});-->
+<!--            $('#trId'+num).removeClass('warning');-->
+<!--            $('#trId'+num).addClass('info');-->
+<!--        });-->
+<!--        $('.table-striped #button_pause'+num).click(function () {-->
+<!--            timer.pause();-->
+<!--            $('#trId'+num).removeClass('info');-->
+<!--            $('#trId'+num).addClass('warning');-->
+<!--        });-->
+<!--        timer.addEventListener('secondsUpdated', function () {-->
+<!--            $('.table-striped #countdownTimer'+num).html(timer.getTimeValues().toString());-->
+<!--        });-->
+<!--        timer.addEventListener('started', function () {-->
+<!--            $('.table-striped #countdownTimer'+num).html(timer.getTimeValues().toString());-->
+<!--        });-->
+<!--        timer.addEventListener('targetAchieved', function (e) {-->
+<!--            $('#countdownTimer'+num).html('Finished');-->
+<!--            document.getElementById("button_play"+num).disabled = true;-->
+<!--            document.getElementById("button_pause"+num).disabled = true;-->
+<!--            document.getElementById("editButton"+num).disabled = true;-->
+<!--            $('#button_play'+num).removeClass('btn-success');-->
+<!--            $('#trId'+num).removeClass('info');-->
+<!--            $('#trId'+num).addClass('success');-->
+<!--        });-->
 <!--</script>-->
+<script>
+    var timer = new Timer();
+
+    $('.table-striped #button_play1').click(function () {
+        timer.start({countdown: true, startValues: {seconds: timeValue1}});
+        $('#trId1').removeClass('warning');
+        $('#trId1').addClass('info');
+    });
+    $('.table-striped #button_pause1').click(function () {
+        timer.pause();
+        $('#trId1').removeClass('info');
+        $('#trId1').addClass('warning');
+    });
+    timer.addEventListener('secondsUpdated', function () {
+        $('.table-striped #countdownTimer1').html(timer.getTimeValues().toString());
+    });
+    timer.addEventListener('started', function () {
+        $('.table-striped #countdownTimer1').html(timer.getTimeValues().toString());
+    });
+    timer.addEventListener('targetAchieved', function (e) {
+        $('#countdownTimer1').html('Finished');
+        document.getElementById("button_play1").disabled = true;
+        document.getElementById("button_pause1").disabled = true;
+        document.getElementById("editButton1").disabled = true;
+        $('#button_play1').removeClass('btn-success');
+        $('#trId1').removeClass('info');
+        $('#trId1').addClass('success');
+    });
+</script>
 </body>
 </html>
