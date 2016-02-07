@@ -134,7 +134,7 @@
                                 <td><?php htmlOut($table['main']); ?></td>
                                 <td><?php htmlOut($table['worktime']); ?></td>
                                 <td>{{remainingTime}}</td>
-                                <td><?php echo(substr($$table['comment'], 0, 175)); ?></td>
+                                <td><?php echo(substr($table['comment'], 0, 175)); ?></td>
                                 <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.php'; ?></td>
                             </tr>
                                 <?php $numberOfRows++; endif; endforeach; ?>

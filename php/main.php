@@ -96,7 +96,7 @@
                                             <script>var num = <?php htmlOut($key + 1); ?>;
                                                 var timeValue<?php htmlOut($key + 1); ?> = <?php htmlOut($table['workTime']); ?>;
                                             </script></td>
-                                        <td><?php htmlOut($table['comment']); ?></td>
+                                        <td><?php htmlOut(substr($table['comment'], 0, 175)); ?></td>
                                         <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.php'; ?></td>
                                         <td>
                                             <div class="player">
