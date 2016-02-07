@@ -40,6 +40,11 @@ body {
     overflow-y: scroll;
 }
 
+.pagination li {
+    display:inline-block;
+    padding:5px;
+}
+
 /*сдвиг placeholder вправо при фокусе*/
 #workToDo::-webkit-input-placeholder       {text-indent: 0px;   transition: text-indent 0.3s ease;}
 #workToDo::-moz-placeholder                {text-indent: 0px;   transition: text-indent 0.3s ease;}

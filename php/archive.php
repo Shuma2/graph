@@ -156,6 +156,7 @@ if(isset($_GET['action']) && ($_GET['action']) == 'search')
 
 include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
+//select all dates from db
 try
 {
     $result = $pdo->query('SELECT id, main, workdate, worktime, status, comment FROM work WHERE workdate <>(SELECT max(workdate) FROM work) ORDER BY workdate DESC');

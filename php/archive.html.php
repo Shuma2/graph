@@ -17,6 +17,12 @@
     <link href="/css/datepicker.css" rel="stylesheet">
     <link rel="shortcut icon" href="/favicon.png" type="image/png">
 
+    <!--  Pagination  -->
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="//raw.github.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js"></script>
+<!--    <script src="/js/list.min.js"></script>-->
+<!--    <script src="/js/list.pagination.js"></script>-->
+
     <!--  Collapse  -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -24,7 +30,7 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js">
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <![endif]-->
@@ -112,7 +118,7 @@
     <div class="panel-group" id="accordion">
         <?php foreach($datesUnique as $key => $nowDate): //перебор по дате (каждая дата выводится только 1 раз)
             $dateFormat = date_create($nowDate); ?>
-        <div class="panel panel-default">
+        <div class="panel panel-default" id="page">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $key + 1; ?>"><?php htmlOut(date_format($dateFormat, 'd.m.Y')); ?></a>
@@ -144,16 +150,37 @@
             </div>
         </div>
         <?php endforeach; ?>
+        <nav>
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
     <?php endif; ?>
+<ul class="pagination"></ul>
 </div>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.html.php'; ?>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/bootstrap-datepicker.js"></script>
+<script href="/js/list.min.js"></script>
 <script type="text/javascript">
     // When the document is ready
     // datepicker
@@ -169,7 +196,8 @@
     });
 </script>
 <script>
-    $(document).ready(function(){ //раскрытие/закрытие всех панелей
+    //раскрытие/закрытие всех панелей
+    $(document).ready(function(){
         $(".btn-info").click(function(){
             $(".collapse").collapse('toggle');
         });
@@ -180,6 +208,7 @@
             $(".collapse").collapse('hide');
         });
     });
-    </script>
+</script>
+
 </body>
 </html>
