@@ -17,15 +17,9 @@
     <link href="/css/datepicker.css" rel="stylesheet">
     <link rel="shortcut icon" href="/favicon.png" type="image/png">
 
-    <!--  Pagination  -->
-    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script src="//raw.github.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js"></script>
-<!--    <script src="/js/list.min.js"></script>-->
-<!--    <script src="/js/list.pagination.js"></script>-->
-
-    <!--  Collapse  -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!--  Collapse !!DO COLLAPSE LATER!! -->
+<!--    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>-->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -83,7 +77,6 @@
             <?php endif; ?>
         </form>
         </div>
-    </div>
     <?php if(isset($_GET['action']) && ($_GET['action']) == 'search'): ?>
         <div class="panel panel-info">
             <div class="panel-heading">Search result</div>
@@ -104,7 +97,7 @@
                             <td><?php htmlOut($table['worktime']); ?></td>
                             <td><?php htmlOut(date_format($dateFormat, 'd.m.Y')); ?></td>
                             <td><?php htmlOut($table['comment']); ?></td>
-                            <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.php'; ?></td>
+                            <td><?php statusCheck($table['status']); ?></td>
                         </tr>
                     <?php endforeach; ?>
                     <?php elseif(!isset($searchResult)): ?>
@@ -116,62 +109,33 @@
         </div>
     <?php else: ?>
     <div class="panel-group" id="accordion">
-        <?php foreach($datesUnique as $key => $nowDate): //перебор по дате (каждая дата выводится только 1 раз)
-            $dateFormat = date_create($nowDate); ?>
-        <div class="panel panel-default" id="page">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $key + 1; ?>"><?php htmlOut(date_format($dateFormat, 'd.m.Y')); ?></a>
-                </h4>
-            </div>
-            <div id="collapse<?php echo $key + 1; ?>" class="panel-collapse collapse">
+        <div class="panel panel-info" id="page">
+            <div class="panel-heading">History (in developing)</div>
                 <div class="panel-body">
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>#</th><th>Work</th><th>Time</th><th>Remaining time</th><th>Comment</th><th>Status</th>
+                            <th>#</th><th>Work</th><th>Time</th><th>Date</th><th>Comment</th><th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <?php $numberOfRows = 1; foreach($allDates as $key2 => $table): ?>
-                                <?php if($table['workdate'] == $nowDate): ?>
-                            <tr>
-                                <td><?php htmlOut($numberOfRows); //выводит отсчёт с 1 каждый день ?></td>
-                                <td><?php htmlOut($table['main']); ?></td>
-                                <td><?php htmlOut($table['worktime']); ?></td>
-                                <td>{{remainingTime}}</td>
-                                <td><?php echo(substr($table['comment'], 0, 175)); ?></td>
-                                <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.php'; ?></td>
-                            </tr>
-                                <?php $numberOfRows++; endif; endforeach; ?>
+                            <?php for($i = 0; $i < count($results->data); $i++): ?>
+                                <tr>
+                                    <td><?php htmlOut($results->data[$i]['id']); ?></td>
+                                    <td><?php htmlOut($results->data[$i]['main']); ?></td>
+                                    <td><?php htmlOut($results->data[$i]['worktime']); ?></td>
+                                    <td><?php htmlOut(reformatDateToList($results->data[$i]['workdate'])); ?></td>
+                                    <td><?php htmlOut($results->data[$i]['comment']); ?></td>
+                                    <td><?php statusCheck($results->data[$i]['status']); ?></td>
+                                </tr>
+                            <?php endfor; ?>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <?php endforeach; ?>
-        <nav>
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+        <?php echo $Paginator->createLinks($links, 'pagination pagination-sm'); ?>
     <?php endif; ?>
-<ul class="pagination"></ul>
 </div>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.html.php'; ?>
@@ -195,20 +159,20 @@
 
     });
 </script>
-<script>
-    //раскрытие/закрытие всех панелей
-    $(document).ready(function(){
-        $(".btn-info").click(function(){
-            $(".collapse").collapse('toggle');
-        });
-        $(".btn-success").click(function(){
-            $(".collapse").collapse('show');
-        });
-        $(".btn-warning").click(function(){
-            $(".collapse").collapse('hide');
-        });
-    });
-</script>
+<!--<script>-->
+<!--    //раскрытие/закрытие всех панелей-->
+<!--    $(document).ready(function(){-->
+<!--        $(".btn-info").click(function(){-->
+<!--            $(".collapse").collapse('toggle');-->
+<!--        });-->
+<!--        $(".btn-success").click(function(){-->
+<!--            $(".collapse").collapse('show');-->
+<!--        });-->
+<!--        $(".btn-warning").click(function(){-->
+<!--            $(".collapse").collapse('hide');-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
 
 </body>
 </html>
