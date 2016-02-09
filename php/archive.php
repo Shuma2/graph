@@ -1,5 +1,6 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/inc/helpers.inc.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/lib/Paginator.class.php';
 
 if(isset($_GET['action']) && ($_GET['action']) == 'search')
 {
@@ -154,29 +155,40 @@ if(isset($_GET['action']) && ($_GET['action']) == 'search')
     exit();
 }
 
-include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
+//include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
+//
+////select all dates from db
+//try
+//{
+//    $result = $pdo->query('SELECT id, main, workdate, worktime, status, comment FROM work WHERE workdate <>(SELECT max(workdate) FROM work) ORDER BY workdate DESC');
+//}
+//catch(PDOException $e)
+//{
+//    errorText('Unable to select list of works: ', $e);
+//}
+//
+//foreach($result as $row)
+//{
+//    $allDates[] = array(
+//        'id' => $row['id'],
+//        'main' => $row['main'],
+//        'workdate' => $row['workdate'],
+//        'worktime' => $row['worktime'],
+//        'status' => $row['status'],
+//        'comment' => $row['comment']);
+//    $dates[] = $row['workdate'];
+//}
+//$datesUnique = array_unique($dates); //удаление дубликатов из  $dates[] = $row['workdate'];
 
-//select all dates from db
-try
-{
-    $result = $pdo->query('SELECT id, main, workdate, worktime, status, comment FROM work WHERE workdate <>(SELECT max(workdate) FROM work) ORDER BY workdate DESC');
-}
-catch(PDOException $e)
-{
-    errorText('Unable to select list of works: ', $e);
-}
+$conn = new mysqli('127.0.0.1', 'root', '', 'graph');
 
-foreach($result as $row)
-{
-    $allDates[] = array(
-        'id' => $row['id'],
-        'main' => $row['main'],
-        'workdate' => $row['workdate'],
-        'worktime' => $row['worktime'],
-        'status' => $row['status'],
-        'comment' => $row['comment']);
-    $dates[] = $row['workdate'];
-}
-$datesUnique = array_unique($dates); //удаление дубликатов из  $dates[] = $row['workdate'];
+$limit = (isset($_GET['limit'])) ? $_GET['limit'] : 25;
+$page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+$links = (isset($_GET['links'])) ? $_GET['links'] : 7;
+$query = "SELECT id, main, workdate, worktime, status, comment FROM work WHERE workdate <>(SELECT max(workdate) FROM work) ORDER BY workdate DESC";
+
+$Paginator = new Paginator($conn, $query);
+
+$results = $Paginator->getData($limit, $page);
 
 include 'archive.html.php';
