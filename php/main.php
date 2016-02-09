@@ -97,7 +97,7 @@
                                                 var timeValue<?php htmlOut($key + 1); ?> = <?php htmlOut($table['workTime']); ?>;
                                             </script></td>
                                         <td><?php htmlOut(substr($table['comment'], 0, 175)); ?></td>
-                                        <td><?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/status.php'; ?></td>
+                                        <td><?php statusCheck($table['status']); ?></td>
                                         <td>
                                             <div class="player">
                                                 <button type="button" id="button_play<?php htmlOut($key + 1); ?>" class="btn-xs btn" onclick='buttonPlayPress(<?php htmlOut($key + 1); ?>)' >
