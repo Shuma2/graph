@@ -19,5 +19,30 @@ function errorText($erText, $e)
 function reformatDateToDB($date)
 {
     $dateFormat = date_create($date);
-    return $dateComplete = date_format($dateFormat, 'Y-m-d');
+    return date_format($dateFormat, 'Y-m-d');
+}
+
+function reformatDateToList($date)
+{
+    $dateFormat = date_create($date);
+    return date_format($dateFormat, 'd.m.Y');
+}
+
+function statusCheck($status)
+{
+    if($status == 0) {
+        echo 'Failed';
+    }
+    elseif($status == 1){
+        echo 'Finished';
+    }
+    elseif($status == 2){
+        echo 'In progress';
+    }
+    elseif($status == 3){
+        echo 'Waiting';
+    }
+    else{
+        echo 'Unknown status';
+    }
 }
