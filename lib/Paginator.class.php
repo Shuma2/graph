@@ -58,9 +58,9 @@ class Paginator
         $start = (($this->_page - $links) > 0) ? $this->_page - $links : 1;
         $end = (($this->_page + $links) < $last) ? $this->_page + $links : $last;
 
+        //-------------------------------------------pagination style----------------------------
         $html = '<ul class="' . $list_class . '">';
 
-        //-------------------------------------------pagination style----------------------------
         $class = ($this->_page == 1) ? "disabled" : "";
         $html .= '<li class="' . $class . '"><a href="?limit=' . $this->_limit . '&page=' . ($this->_page - 1) . '">&laquo;</a></li>';
 

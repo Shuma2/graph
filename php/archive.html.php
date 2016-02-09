@@ -108,7 +108,7 @@
             </div>
         </div>
     <?php else: ?>
-    <div class="panel-group" id="accordion">
+    <div class="panel-group">
         <div class="panel panel-info" id="page">
             <div class="panel-heading">History (in developing)</div>
                 <div class="panel-body">
@@ -132,15 +132,15 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
         </div>
         <?php echo $Paginator->createLinks($links, 'pagination pagination-sm'); ?>
+    </div>
     <?php endif; ?>
 </div>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.html.php'; ?>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/bootstrap-datepicker.js"></script>
