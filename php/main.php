@@ -100,7 +100,7 @@
                                             </script>
                                         </td>
                                         <td><?php htmlOut(substr($table['comment'], 0, 175)); ?></td>
-                                        <td><?php statusCheck($table['status']); ?></td>
+                                        <td id="status<?php htmlOut($table['id']); ?>"><?php statusCheck($table['status']); ?></td>
                                 <!--Кнопки таймера-->
                                         <td>
                                             <div class="player">
@@ -129,6 +129,7 @@
                                                 timer<?php htmlOut($table['id']); ?>.start({countdown: true, startValues: {minutes: timeValue<?php htmlOut($table['id']); ?>}});
                                                 $('#trId<?php htmlOut($table['id']); ?>').removeClass('warning');
                                                 $('#trId<?php htmlOut($table['id']); ?>').addClass('info');
+                                                $('#status<?php htmlOut($table['id']); ?>').html('In progress');
                                             });
                                             $('.table-striped #button_pause<?php htmlOut($table['id']); ?>').click(function () {
                                                 timer<?php htmlOut($table['id']); ?>.pause();
