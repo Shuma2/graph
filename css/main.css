@@ -42,7 +42,6 @@ body {
 
 .pagination li {
     display:inline-block;
-    padding:5px;
 }
 
 /*сдвиг placeholder вправо при фокусе*/

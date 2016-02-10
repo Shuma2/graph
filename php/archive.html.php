@@ -31,87 +31,51 @@
 </head>
 <body>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/nav.html.php'; ?>
-<div class="container">
-    <div class="panel-group">
-        <form action="" method="get" autocomplete="off">
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <input type="hidden" name="action" value="search">
-                <input type="submit" class="btn btn-primary" value="Search">
-            </div>
-                <div class="panel-body">
-                    <?php if(!isset($_GET['error'])) {
-                        echo "<p class=\"text-muted\">NOTE: For search please fill one or more fields. One date, or range of dates are optional.</p>";}
-                        else{ echo "<p class=\"text-danger bg-danger\">NOTE: For search please fill one or more fields. One date, or range of dates are optional.</p>";} ?>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="workSearch">Work:</label>
-                                <input type="text" class="form-control" id="workSearch" name="workSearch" placeholder="Part or full title" value="">
+<div class="main">
+    <div class="container">
+        <div class="panel-group">
+            <form action="" method="get" autocomplete="off">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <input type="hidden" name="action" value="search">
+                    <input type="submit" class="btn btn-primary" value="Search">
+                </div>
+                    <div class="panel-body">
+                        <?php if(!isset($_GET['error'])) {
+                            echo "<p class=\"text-muted\">NOTE: For search please fill one or more fields. One date, or range of dates are optional.</p>";}
+                            else{ echo "<p class=\"text-danger bg-danger\">NOTE: For search please fill one or more fields. One date, or range of dates are optional.</p>";} ?>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="workSearch">Work:</label>
+                                    <input type="text" class="form-control" id="workSearch" name="workSearch" placeholder="Part or full title" value="">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="dateSearch">Date:</label>
-                                <div class="hero-unit input-group input-daterange">
-                                    <input type="text" class="form-control" name="dateSearch" id="dateSearch" placeholder="Choose date" data-date-end-date="0d">
-                                    <span class="input-group-addon">to</span>
-                                    <input type="text" class="form-control" name="dateSearch2" id="dateSearch2" placeholder="Choose date" data-date-end-date="0d">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="dateSearch">Date:</label>
+                                    <div class="hero-unit input-group input-daterange">
+                                        <input type="text" class="form-control" name="dateSearch" id="dateSearch" placeholder="Choose date" data-date-end-date="0d">
+                                        <span class="input-group-addon">to</span>
+                                        <input type="text" class="form-control" name="dateSearch2" id="dateSearch2" placeholder="Choose date" data-date-end-date="0d">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="commentSearch">Comment:</label>
+                                    <input type="text" class="form-control" id="commentSearch" name="commentSearch" placeholder="Part or full comment" value="">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="commentSearch">Comment:</label>
-                                <input type="text" class="form-control" id="commentSearch" name="commentSearch" placeholder="Part or full comment" value="">
-                            </div>
-                        </div>
                     </div>
-                </div>
-            <?php if(isset($datesUnique)): ?>
-            <div class="panel-footer">
-                <button type="button" class="btn btn-info">Toggle</button>
-                <button type="button" class="btn btn-success">Show all</button>
-                <button type="button" class="btn btn-warning">Hide all</button>
             </div>
-            <?php endif; ?>
-        </form>
-        </div>
-    <?php if(isset($_GET['action']) && ($_GET['action']) == 'search'): ?>
-        <div class="panel panel-info">
-            <div class="panel-heading">Search result</div>
-            <div class="panel-body">
-                <?php if(isset($searchResult)): ?>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>#</th><th>Work</th><th>Time</th><th>Date</th><th>Comment</th><th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach($searchResult as $key => $table):
-                        $dateFormat = date_create($table['workdate']); ?>
-                        <tr>
-                            <td><?php htmlOut($key + 1); //выводит отсчёт с 1 каждый день ?></td>
-                            <td><?php htmlOut($table['main']); ?></td>
-                            <td><?php htmlOut($table['worktime']); ?></td>
-                            <td><?php htmlOut(date_format($dateFormat, 'd.m.Y')); ?></td>
-                            <td><?php htmlOut($table['comment']); ?></td>
-                            <td><?php statusCheck($table['status']); ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                    <?php elseif(!isset($searchResult)): ?>
-                    <h3 id="notificationNoNotes">No matches</h3>
-                    </tbody>
-                    <?php endif; ?>
-                </table>
-            </div>
-        </div>
-    <?php else: ?>
-    <div class="panel-group">
-        <div class="panel panel-info" id="page">
-            <div class="panel-heading">History (in developing)</div>
+            </form>
+        <?php if(isset($_GET['action']) && ($_GET['action']) == 'search'): ?>
+            <div class="panel panel-info">
+                <div class="panel-heading">Search result</div>
                 <div class="panel-body">
+                    <?php if(isset($searchResult)): ?>
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -119,25 +83,57 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <?php for($i = 0; $i < count($results->data); $i++): ?>
-                                <tr>
-                                    <td><?php htmlOut($results->data[$i]['id']); ?></td>
-                                    <td><?php htmlOut($results->data[$i]['main']); ?></td>
-                                    <td><?php htmlOut($results->data[$i]['worktime']); ?></td>
-                                    <td><?php htmlOut(reformatDateToList($results->data[$i]['workdate'])); ?></td>
-                                    <td><?php htmlOut($results->data[$i]['comment']); ?></td>
-                                    <td><?php statusCheck($results->data[$i]['status']); ?></td>
-                                </tr>
-                            <?php endfor; ?>
+                        <?php foreach($searchResult as $key => $table):
+                            $dateFormat = date_create($table['workdate']); ?>
+                            <tr>
+                                <td><?php htmlOut($key + 1); //выводит отсчёт с 1 каждый день ?></td>
+                                <td><?php htmlOut($table['main']); ?></td>
+                                <td><?php htmlOut($table['worktime']); ?></td>
+                                <td><?php htmlOut(date_format($dateFormat, 'd.m.Y')); ?></td>
+                                <td><?php htmlOut($table['comment']); ?></td>
+                                <td><?php statusCheck($table['status']); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        <?php elseif(!isset($searchResult)): ?>
+                        <h3 id="notificationNoNotes">No matches</h3>
                         </tbody>
+                        <?php endif; ?>
                     </table>
                 </div>
-        </div>
-        <?php echo $Paginator->createLinks($links, 'pagination pagination-sm'); ?>
-    </div>
-    <?php endif; ?>
-</div>
+            </div>
+        <?php else: ?>
+        <div class="panel-group">
+            <div class="panel panel-info" id="page">
+                <div class="panel-heading">History (in developing)</div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th><th>Work</th><th>Time</th><th>Date</th><th>Comment</th><th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <?php for($i = 0; $i < count($results->data); $i++): ?>
+                                    <tr>
+                                        <td><?php htmlOut($results->data[$i]['id']); ?></td>
+                                        <td><?php htmlOut($results->data[$i]['main']); ?></td>
+                                        <td><?php htmlOut($results->data[$i]['worktime']); ?></td>
+                                        <td><?php htmlOut(reformatDateToList($results->data[$i]['workdate'])); ?></td>
+                                        <td><?php htmlOut($results->data[$i]['comment']); ?></td>
+                                        <td><?php statusCheck($results->data[$i]['status']); ?></td>
+                                    </tr>
+                                <?php endfor; ?>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
 
+        </div>
+        <?php endif; ?>
+        </div>
+    <?php echo $Paginator->createLinks($links, 'pagination pagination-sm'); ?>
+    </div>
+</div>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.html.php'; ?>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
