@@ -111,7 +111,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'Update') { //разобрат
     exit();
 }
 
-if(isset($_POST['control']) && $_POST['control'] == 'Delete') { //удаление поля
+if(isset($_POST['control']) && $_POST['control'] && $_POST['control'] == 'Delete') { //удаление поля
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
     try{
@@ -127,7 +127,7 @@ if(isset($_POST['control']) && $_POST['control'] == 'Delete') { //удалени
     exit();
 }
 
-if(isset($_POST['control']) && $_POST['control'] == 'Edit') { //нажатие кнопки "Edit" в таблице
+if(isset($_POST['control']) && $_POST['control'] && $_POST['control'] == 'Edit') { //нажатие кнопки "Edit" в таблице
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
     $idHere = $_POST['id'];
@@ -149,6 +149,24 @@ if(isset($_POST['control']) && $_POST['control'] == 'Edit') { //нажатие �
     $workToDo = $row['main'];
     $timeForWork = $row['worktime'];
     $commentForWork = $row['comment'];
+}
+
+if(isset($_POST['control']) && $_POST['control'] && $_POST['control'] == 'Done')
+{
+    include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
+
+    try{
+        $sql = 'UPDATE work SET status = 1 WHERE id = :id';
+        $s = $pdo->prepare($sql);
+        $s->bindValue(':id', $_POST['id']);
+        $s->execute();
+    }
+    catch(PDOException $e){
+        errorText('Unable to update values: ', $e);
+    }
+
+    header('Location: .');
+    exit();
 }
 
 if(isset($_POST['random']) == 'Add random'){
