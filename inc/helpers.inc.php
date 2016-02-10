@@ -34,7 +34,7 @@ function statusCheck($status)
         echo 'Failed';
     }
     elseif($status == 1){
-        echo 'Finished';
+        echo 'Success';
     }
     elseif($status == 2){
         echo 'In progress';
