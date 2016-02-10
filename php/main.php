@@ -15,9 +15,7 @@
     <link href="/css/menu.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
     <link rel="shortcut icon" href="/favicon.png" type="image/png">
-
-    <?php echo $emptyWork;
-    echo $emptyTime; ?>
+    <?php echo $emptyWork; echo $emptyTime; ?>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,6 +27,8 @@
 </head>
 <body>
 <script src="/js/easytimer.min.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/nav.html.php'; ?>
 <div class="main">
     <div class="container">
@@ -77,44 +77,88 @@
                 </div>
             </form>
             <div class="panel panel-info">
-                <div class="panel-heading">List for <?php htmlOut(date('d.m.Y')); ?></div>
+                <div class="panel-heading">List for <?php htmlOut(date('d.m.Y')); ?> (in developing)</div>
                 <div class="panel-body">
                     <?php if(isset($resultTable)): ?>
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>#</th><th>Work</th><th>Time</th><th>Remaining time</th><th>Comment</th><th>Status</th><th>Timer</th><th>Edit</th><th>Delete</th>
+                            <th>#</th><th>Work</th><th>Time</th><th>Remaining time</th><th>Comment</th><th>Status</th><th>Timer</th><th>Controls</th>
                         </tr>
                         </thead>
                         <tbody>
                                 <?php foreach($resultTable as $key => $table): ?>
-                                    <tr id="trId<?php htmlOut($key + 1); ?>">
+                                <!--Начало строки таблицы-->
+                                    <tr class="" id="trId<?php htmlOut($table['id']); ?>">
                                         <td><?php htmlOut($key + 1); //выводит отсчёт с 1 каждый день ?></td>
                                         <td><?php htmlOut($table['work']); ?></td>
                                         <td><?php htmlOut($table['workTime']); ?></td>
-                                        <td id="countdownTimer<?php htmlOut($key + 1); ?>">
-                                            <script>var num = <?php htmlOut($key + 1); ?>;
-                                                var timeValue<?php htmlOut($key + 1); ?> = <?php htmlOut($table['workTime']); ?>;
-                                            </script></td>
+                                <!--Объявление таймера и JS переменных для таймера-->
+                                        <td id="countdownTimer<?php htmlOut($table['id']); ?>">
+                                            <script>
+                                                var timeValue<?php htmlOut($table['id']); ?> = <?php htmlOut($table['workTime']); ?>;
+                                            </script>
+                                        </td>
                                         <td><?php htmlOut(substr($table['comment'], 0, 175)); ?></td>
                                         <td><?php statusCheck($table['status']); ?></td>
+                                <!--Кнопки таймера-->
                                         <td>
                                             <div class="player">
-                                                <button type="button" id="button_play<?php htmlOut($key + 1); ?>" class="btn-xs btn" onclick='buttonPlayPress(<?php htmlOut($key + 1); ?>)' >
+                                                <button type="button" id="button_play<?php htmlOut($table['id']); ?>" class="btn-xs btn" onclick='buttonPlayPress(<?php htmlOut($table['id']); ?>)' >
                                                     <i class="fa fa-play"></i>
                                                 </button>
-                                                <button type="button" id="button_pause<?php htmlOut($key + 1); ?>" class="btn-xs btn" onclick='buttonPausePress(<?php htmlOut($key + 1); ?>)'>
+                                                <button type="button" id="button_pause<?php htmlOut($table['id']); ?>" class="btn-xs btn" onclick='buttonPausePress(<?php htmlOut($table['id']); ?>)'>
                                                     <i class="fa fa-pause"></i>
                                                 </button>
                                             </div>
                                         </td>
+                                <!--Кнопки edit/delete/done-->
                                         <form action="?" method="post">
                                             <div>
                                                 <td id="hiddenIdRow"><input type="hidden" name="id" value="<?php echo $table['id']; ?>"></td>
-                                                <td><input type="submit" id="editButton<?php htmlOut($key + 1); ?>" name="control" class="btn btn-info btn-xs" value="Edit"></td>
-                                                <td><input type="submit" name="control" class="btn btn-danger btn-xs" value="Delete"></td>
+                                                <td><input type="submit" id="editButton<?php htmlOut($table['id']); ?>" name="control" class="btn btn-info btn-xs" value="Edit">
+                                                <input type="submit" id="deleteButton<?php htmlOut($table['id']); ?>" name="control" class="btn btn-danger btn-xs" value="Delete">
+                                                <input type="submit" id="doneButton<?php htmlOut($table['id']); ?>" name="control" class="btn btn-success btn-xs" value="Done"></td>
                                             </div>
                                         </form>
+                                <!--Просто вафли какая кривая реализация таймера-->
+                                        <script>
+                                            var timer<?php htmlOut($table['id']); ?> = new Timer();
+
+                                            $('.table-striped #button_play<?php htmlOut($table['id']); ?>').click(function () {
+                                                timer<?php htmlOut($table['id']); ?>.start({countdown: true, startValues: {minutes: timeValue<?php htmlOut($table['id']); ?>}});
+                                                $('#trId<?php htmlOut($table['id']); ?>').removeClass('warning');
+                                                $('#trId<?php htmlOut($table['id']); ?>').addClass('info');
+                                            });
+                                            $('.table-striped #button_pause<?php htmlOut($table['id']); ?>').click(function () {
+                                                timer<?php htmlOut($table['id']); ?>.pause();
+                                                $('#trId<?php htmlOut($table['id']); ?>').removeClass('info');
+                                                $('#trId<?php htmlOut($table['id']); ?>').addClass('warning');
+                                            });
+                                            timer<?php htmlOut($table['id']); ?>.addEventListener('secondsUpdated', function () {
+                                                $('.table-striped #countdownTimer<?php htmlOut($table['id']); ?>').html(timer<?php htmlOut($table['id']); ?>.getTimeValues().toString());
+                                            });
+                                            timer<?php htmlOut($table['id']); ?>.addEventListener('started', function () {
+                                                $('.table-striped #countdownTimer<?php htmlOut($table['id']); ?>').html(timer<?php htmlOut($table['id']); ?>.getTimeValues().toString());
+                                            });
+                                            timer<?php htmlOut($table['id']); ?>.addEventListener('targetAchieved', function (e) {
+                                                $('#countdownTimer<?php htmlOut($table['id']); ?>').html('Finished');
+                                                $('#button_play<?php htmlOut($table['id']); ?>').removeClass('btn-success');
+                                                $('#trId<?php htmlOut($table['id']); ?>').removeClass('info');
+                                                $('#doneButton<?php htmlOut($table['id']); ?>').click();
+                                            })
+                                        </script>
+                                <!--Мега-кривой disable выбраной строки-->
+                                        <?php if($table['status'] == 1): ?>
+                                            <script>
+                                                document.getElementById("button_play<?php htmlOut($table['id']); ?>").disabled = true;
+                                                document.getElementById("button_pause<?php htmlOut($table['id']); ?>").disabled = true;
+                                                document.getElementById("editButton<?php htmlOut($table['id']); ?>").disabled = true;
+                                                document.getElementById("deleteButton<?php htmlOut($table['id']); ?>").disabled = true;
+                                                document.getElementById("doneButton<?php htmlOut($table['id']); ?>").disabled = true;
+                                                document.getElementById("trId<?php htmlOut($table['id']); ?>").setAttribute("class","success text-muted");
+                                            </script>
+                                        <?php endif; ?>
                                     </tr>
                                 <?php endforeach; ?>
                         <?php elseif(!isset($resultTable)): ?>
@@ -129,71 +173,9 @@
 </div>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.html.php'; ?>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/js/bootstrap.min.js"></script>
-
 <script src='http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js'></script> <!--for timer-->
 <script src="/js/player.js"></script> <!--for timer-->
-<!--<script>-->
-<!--    document.write(num);-->
-<!--        var timer = new Timer();-->
-<!---->
-<!--        $('.table-striped #button_play'+num).click(function () {-->
-<!--            timer.start({countdown: true, startValues: {seconds: timeValue1}});-->
-<!--            $('#trId'+num).removeClass('warning');-->
-<!--            $('#trId'+num).addClass('info');-->
-<!--        });-->
-<!--        $('.table-striped #button_pause'+num).click(function () {-->
-<!--            timer.pause();-->
-<!--            $('#trId'+num).removeClass('info');-->
-<!--            $('#trId'+num).addClass('warning');-->
-<!--        });-->
-<!--        timer.addEventListener('secondsUpdated', function () {-->
-<!--            $('.table-striped #countdownTimer'+num).html(timer.getTimeValues().toString());-->
-<!--        });-->
-<!--        timer.addEventListener('started', function () {-->
-<!--            $('.table-striped #countdownTimer'+num).html(timer.getTimeValues().toString());-->
-<!--        });-->
-<!--        timer.addEventListener('targetAchieved', function (e) {-->
-<!--            $('#countdownTimer'+num).html('Finished');-->
-<!--            document.getElementById("button_play"+num).disabled = true;-->
-<!--            document.getElementById("button_pause"+num).disabled = true;-->
-<!--            document.getElementById("editButton"+num).disabled = true;-->
-<!--            $('#button_play'+num).removeClass('btn-success');-->
-<!--            $('#trId'+num).removeClass('info');-->
-<!--            $('#trId'+num).addClass('success');-->
-<!--        });-->
-<!--</script>-->
-<script>
-    var timer = new Timer();
-
-    $('.table-striped #button_play1').click(function () {
-        timer.start({countdown: true, startValues: {seconds: timeValue1}});
-        $('#trId1').removeClass('warning');
-        $('#trId1').addClass('info');
-    });
-    $('.table-striped #button_pause1').click(function () {
-        timer.pause();
-        $('#trId1').removeClass('info');
-        $('#trId1').addClass('warning');
-    });
-    timer.addEventListener('secondsUpdated', function () {
-        $('.table-striped #countdownTimer1').html(timer.getTimeValues().toString());
-    });
-    timer.addEventListener('started', function () {
-        $('.table-striped #countdownTimer1').html(timer.getTimeValues().toString());
-    });
-    timer.addEventListener('targetAchieved', function (e) {
-        $('#countdownTimer1').html('Finished');
-        document.getElementById("button_play1").disabled = true;
-        document.getElementById("button_pause1").disabled = true;
-        document.getElementById("editButton1").disabled = true;
-        $('#button_play1').removeClass('btn-success');
-        $('#trId1').removeClass('info');
-        $('#trId1').addClass('success');
-    });
-</script>
 </body>
 </html>
