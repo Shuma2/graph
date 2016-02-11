@@ -1,6 +1,25 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/inc/helpers.inc.php';
 
+if(!isset($_COOKIE['statusUpdate']))
+{
+    include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
+
+    try
+    {
+        $result = $pdo->query('UPDATE work SET status = 0 WHERE status <> 1 AND workdate <> CURDATE()');
+    }
+    catch(PDOException $e)
+    {
+        errorText('Unable to update status: ', $e);
+    }
+
+    setcookie('statusUpdate', 1, strtotime('today 23:59'), '/');
+
+    header('Location: .');
+    exit();
+}
+
 $placeholderWork = 'What need to do';
 $placeholderTime = 'Time for work';
 
