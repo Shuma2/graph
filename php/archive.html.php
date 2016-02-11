@@ -127,11 +127,10 @@
                         </table>
                     </div>
             </div>
-
         </div>
+            <?php echo $Paginator->createLinks($links, 'pagination pagination-sm'); ?>
         <?php endif; ?>
         </div>
-    <?php echo $Paginator->createLinks($links, 'pagination pagination-sm'); ?>
     </div>
 </div>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.html.php'; ?>
