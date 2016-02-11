@@ -1,0 +1,6 @@
+[11.02.2016 22:09:55]: Unable to insert query: : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'graph.works' doesn't exist
+[11.02.2016 22:09:55]: Unable to insert query: : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'graph.works' doesn't exist
+[11.02.2016 22:09:55]: Unable to insert query: : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'graph.works' doesn't exist
+[11.02.2016 22:09:56]: Unable to insert query: : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'graph.works' doesn't exist
+[11.02.2016 22:09:56]: Unable to insert query: : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'graph.works' doesn't exist
+[11.02.2016 22:09:57]: Unable to insert query: : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'graph.works' doesn't exist

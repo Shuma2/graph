@@ -12,6 +12,10 @@ function htmlOut($text)
 function errorText($erText, $e)
 {
     $error = "$erText: " . $e->getMessage();
+    $line = date('[d.m.Y H:i:s]: ');
+    $log = fopen("inc/ErrorLog.txt", 'a') or die("Unable to create file");
+    fwrite($log, $line . $error . "\n") or die ('Unable to write data');
+    fclose($log);
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/error.html.php';
     exit();
 }
