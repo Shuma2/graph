@@ -120,7 +120,10 @@
                                         <td><?php htmlOut($results->data[$i]['worktime']); ?></td>
                                         <td><?php htmlOut(reformatDateToList($results->data[$i]['workdate'])); ?></td>
                                         <td><?php htmlOut($results->data[$i]['comment']); ?></td>
-                                        <td><?php statusCheck($results->data[$i]['status']); ?></td>
+                                        <td <?php if($results->data[$i]['status'] == 1)
+                                            echo "style=\"color: green;\"";
+                                        else
+                                            echo "style=\"color: red;\"";?>><?php statusCheck($results->data[$i]['status']); ?></td>
                                     </tr>
                                 <?php endfor; ?>
                             </tbody>
