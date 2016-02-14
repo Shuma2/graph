@@ -21,7 +21,7 @@ if(!isset($_COOKIE['statusUpdate']))
 }
 
 $placeholderWork = 'What need to do';
-$placeholderTime = 'Time for work';
+$placeholderTime = 'Number of minutes';
 
 function countNumberOfWork() { //подсчёт кол-ва записел в поле #
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
@@ -192,7 +192,7 @@ if(isset($_POST['random']) == 'Add random'){
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/db.inc.php';
 
     try{
-        $result = $pdo->query('INSERT INTO work SET main = concat(\'Graph|\', floor((RAND() * 201) + 10)), worktime = 90, workdate = CURDATE(), status = 3, comment = \'TEST\'');
+        $result = $pdo->query('INSERT INTO work SET main = concat(\'Graph|\', floor((RAND() * 201) + 10)), worktime = 3, workdate = CURDATE(), status = 3, comment = \'TEST\'');
     }
     catch(PDOException $e) {
         errorText('Unable to insert random work: ', $e);
