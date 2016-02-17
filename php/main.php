@@ -126,7 +126,7 @@
                                             var timer<?php htmlOut($table['id']); ?> = new Timer();
 
                                             $('.table-striped #button_play<?php htmlOut($table['id']); ?>').click(function () {
-                                                timer<?php htmlOut($table['id']); ?>.start({countdown: true, startValues: {seconds: timeValue<?php htmlOut($table['id']); ?>}});
+                                                timer<?php htmlOut($table['id']); ?>.start({countdown: true, startValues: {minutes: timeValue<?php htmlOut($table['id']); ?>}});
                                                 $('#trId<?php htmlOut($table['id']); ?>').removeClass('warning');
                                                 $('#trId<?php htmlOut($table['id']); ?>').addClass('info');
                                                 $('#status<?php htmlOut($table['id']); ?>').html('In progress');
