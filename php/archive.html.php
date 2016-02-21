@@ -91,7 +91,10 @@
                                 <td><?php htmlOut($table['worktime']); ?></td>
                                 <td><?php htmlOut(date_format($dateFormat, 'd.m.Y')); ?></td>
                                 <td><?php htmlOut($table['comment']); ?></td>
-                                <td><?php statusCheck($table['status']); ?></td>
+                                <td <?php if($results->data[$i]['status'] == 1)
+                                    echo "style=\"color: green;\"";
+                                else
+                                    echo "style=\"color: red;\"";?>><?php statusCheck($results->data[$i]['status']); ?></td>
                             </tr>
                         <?php endforeach; ?>
                         <?php elseif(!isset($searchResult)): ?>
