@@ -28,6 +28,19 @@
         <h1>Under construction</h1>
     </div>
 </div>
+<div class="container">
+    <div class="body-content">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Features</h2>
+                <p class="lead">• Plans for departments with roles</p>
+                <p class="lead">• Plans for long time</p>
+                <p class="lead">• Plans for every day</p>
+                <p class="lead">• SMS/Email notifications if "every day" plans aren't done</p>
+            </div>
+        </div>
+    </div>
+</div>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.html.php'; ?>
 </body>
 </html>
