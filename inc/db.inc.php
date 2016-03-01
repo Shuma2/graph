@@ -5,7 +5,11 @@ try{
     $pdo->exec('SET NAMES "utf8"');
 }
 catch(PDOException $e){
-    $error = 'Error connecting to database: ' . $e->getMessage();
-    include 'error.html.php';
+    $error = "DataBase error: " . $e->getMessage();
+    $line = date('[d.m.Y H:i:s]: ');
+    $log = fopen("inc/ErrorLog.txt", 'a') or die("Unable to create file");
+    fwrite($log, $line . $error . "\n") or die ('Unable to write data');
+    fclose($log);
+    include $_SERVER['DOCUMENT_ROOT'] . '/inc/error.html.php';
     exit();
 }
