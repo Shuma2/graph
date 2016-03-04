@@ -1,4 +1,4 @@
 <?php
-$day = 2;
+$day = 3;
 
 include 'plans.html.php';
