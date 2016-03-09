@@ -239,7 +239,7 @@ foreach($result as $row){
     );
 }
 
-include $_SERVER['DOCUMENT_ROOT'] . '/php/main.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/php/views/index.html.php';
 
 
 
