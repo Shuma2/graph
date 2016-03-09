@@ -191,4 +191,4 @@ $Paginator = new Paginator($conn, $query);
 
 $results = $Paginator->getData($limit, $page);
 
-include 'archive.html.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/php/views/archive.html.php';

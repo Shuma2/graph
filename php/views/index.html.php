@@ -29,7 +29,7 @@
 <script src="/js/easytimer.min.js"></script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/php/nav.html.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/php/views/nav.html.php'; ?>
 <div class="main">
     <div class="container">
         <div class="panel-group">
@@ -172,7 +172,7 @@
         </div>
     </div>
 </div>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.html.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/php/views/footer.html.php'; ?>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/js/bootstrap.min.js"></script>

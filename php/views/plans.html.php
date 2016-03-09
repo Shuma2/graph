@@ -22,7 +22,7 @@
     <![endif]-->
 </head>
 <body>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/php/nav.html.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/php/views/nav.html.php'; ?>
 <div class="container">
     <div class="jumbotron" align="center">
         <h1>Under construction</h1>
@@ -39,6 +39,6 @@
         </div>
     </div>
 </div>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/php/footer.html.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/php/views/footer.html.php'; ?>
 </body>
 </html>
