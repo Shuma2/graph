@@ -216,7 +216,7 @@ if(isset($_GET['error'])){
 
     $emptyWork = '<style>' . '#workToDo::-webkit-input-placeholder{color:#ff551b;} #workToDo::-moz-placeholder{color:#ff551b;} #workToDo:-ms-input-placeholder{color:#ff551b;}' . '</style>';
     $emptyTime = '<style>' . '#time::-webkit-input-placeholder{color:#ff551b;} #time::-moz-placeholder{color:#ff551b;} #time:-ms-input-placeholder{color:#ff551b;}' . '</style>';
-    session_abort();
+//    session_abort();
 }
 
 //SELECT в главную таблицу

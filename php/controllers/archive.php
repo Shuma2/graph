@@ -151,7 +151,7 @@ if(isset($_GET['action']) && ($_GET['action']) == 'search')
             'comment' => $row['comment']
         );
     }
-    include 'archive.html.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/php/views/archive.html.php';
     exit();
 }
 
