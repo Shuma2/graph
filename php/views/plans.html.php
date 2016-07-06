@@ -26,7 +26,7 @@
 <div class="container">
     <div class="jumbotron" align="center">
         <h1>Under construction</h1>
-        <h2>Work is started</h2>
+        <h2>Thank you for patience</h2>
     </div>
 </div>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/php/views/footer.html.php'; ?>
