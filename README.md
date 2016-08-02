@@ -1,5 +1,5 @@
 # Graph
-<h3>Under construction (3 months)</h3>
+<h3>Work stoped. Sometime I will create a new application with good framework and architecture. </h3>
 <h3>Features:</h3>
 <ul>
 <li> Plans for departments with roles</li>
