@@ -1,6 +1,7 @@
 # Graph
-<h3>Work stoped. Sometime I will create a new application with good framework and architecture. </h3>
-<h3>Features:</h3>
+<h3>Project closed. This was a nice expirience :)</h3>
+<br>
+<h3>Dead features:</h3>
 <ul>
 <li> Plans for departments with roles</li>
 <li> Long term plans</li>
